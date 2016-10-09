@@ -7,35 +7,55 @@ var torrentId = 'magnet:?xt=urn:btih:1127fcb8e3a7952d236b257ed75cc49e5d9fa919&dn
 
 client.add(torrentId, function(torrent) {
     // Torrents can contain many files. Let's use the first.
-    var files = torrent.files
-    rellenarLista(files)
+    var files = torrent.files;
+    rellenarLista(files);
     
     console.log(files.length)
     for (var i = 0; i < files.length; i++) {
-	console.log(files[i].name)
+	console.log(files[i].name);
 	/*while (client.downloaded < files[i].length){
 	    
 	}*/
     }
-
-    playSelected(files);
+    
+    var reproduciendo = files[5].appendTo("body");
+    var click = litenClick(files);
+    /*if(click != null){
+	console.log("voy a reproducir: " + click.toString());
+	files[click].appendTo("body");
+    }*/
 })
 
 function rellenarLista(files) {
-    lista = ['http://www.ksdjfksdjgfsjdhfsdf.com','http://www.manolico.com','http://www.laputaqueteparioquefuetumaeynotieneculpa.com'];
-                var bloque = document.getElementById("lista");
-                for (var i = 0; i < files.length; i++) {
-                    var texto = document.createElement("li");
-		    texto.id = i;
-		    //console.log(files[i])
-                    texto.innerHTML = files[i].name;
-                    bloque.appendChild(texto);
-                }
+    var bloque = document.getElementById("songs_queue");
+    for (var i = 0; i < files.length; i++) {
+        var texto = document.createElement("li");
+	texto.setAttribute("id", "item_"+i.toString());
+	//console.log(files[i])
+        texto.innerHTML = files[i].name;
+        bloque.appendChild(texto);
+    }
 }
 
-function playSelected(files){
-    var index = document.getElementById('5');
-    file = files[5];
-    file.appendTo('body');
+function litenClick(files){
+    var lista = document.getElementById("songs_queue")
+    lista.onclick = function(e){
+	var clicada = getEventTarget(e);
+	var index = clicada.id;
+	var num_str = index.replace("item_", "");
+	console.log(num_str);
+	var num = parseInt(num_str);
+	console.log("reproduciendo: " + files[num].name);
+	files[num].appendTo("body");
+	//var num = parseInt(index);
+	//console.log(num.toString());
+	//alert(clicada.innerHTML);
+	//	return num;
+    }
+}
+
+function getEventTarget(e) {
+    e = e || window.event;
+    return e.target || e.srcElement; 
 }
     
