@@ -46,6 +46,9 @@ function litenClick(files){
 	console.log(num_str);
 	var num = parseInt(num_str);
 	console.log("reproduciendo: " + files[num].name);
+	var el = document.querySelector('audio');
+	console.log(el);
+	el.parentNode.removeChild(el)
 	files[num].appendTo("body");
 	//var num = parseInt(index);
 	//console.log(num.toString());
