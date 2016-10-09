@@ -26,10 +26,15 @@ client.add(torrentId, function(torrent) {
     }*/
 })
 
+/**
+* muestra una lista de las canciones
+* @param files archivos del torrent
+*/
 function rellenarLista(files) {
     var bloque = document.getElementById("songs_queue");
     for (var i = 0; i < files.length; i++) {
         var texto = document.createElement("li");
+	//le asignamos un id a cada elemento de la lista para referenciarlos luego
 	texto.setAttribute("id", "item_"+i.toString());
 	//console.log(files[i])
         texto.innerHTML = files[i].name;
@@ -37,6 +42,10 @@ function rellenarLista(files) {
     }
 }
 
+/**
+* funcion que comprueba si hay click en algun elemento de la lista de canciones
+* @param files los archivos del torrent
+*/
 function litenClick(files){
     var lista = document.getElementById("songs_queue")
     lista.onclick = function(e){
