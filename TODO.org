@@ -1,0 +1,10 @@
+Rafa Leyva Ruiz
+
+Pa yo organizarme
+
+* TASK hacer que el html acepte un torrent
+* TASK hacer que descargue torrent multifile
+* TASK seleccionar orden en que se descargan los files
+* TASK que no salga el reproducctor de video, mas bien una cosilla chica
+* TASK [#C] trastear con el css
+* TASK 
