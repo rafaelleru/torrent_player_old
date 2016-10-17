@@ -2,23 +2,12 @@ var WebTorrent = require('webtorrent')
 var client = new WebTorrent()
 var files = []
 var reproduciendo
-var torrentId //= 'magnet:?xt=urn:btih:1127fcb8e3a7952d236b257ed75cc49e5d9fa919&dn=Dream+Theater+-+The+Number+Of+The+Beast+2005+320ak&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Fzer0day.ch%3A1337&tr=udp%3A%2F%2Fopen.demonii.com%3A1337&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Fexodus.desync.com%3A6969'
 
 module.exports={ 
     addTorrent:function addTorrent(torrentID){
 	client.add(torrentID, function(torrent) {
-	// Torrents can contain many files. Let's use the first.
-	    //files = torrent.files;
+	    //añadimos el torrent al cliente, y actualizamos la interfaz.
 	    update();
-
-	    
-	
-	    //var reproduciendo = files[0].appendTo("body");
-	//var click = listenClick(files);
-	/*if(click != null){
-	  console.log("voy a reproducir: " + click.toString());
-	  files[click].appendTo("body");
-	  }*/
 	})
     }
 }
@@ -49,20 +38,15 @@ function listenClick(files){
 	var index = clicada.id;
 	var num_str = index.replace("item_", "");
 	/*console.log(num_str);
-	
-	console.log("reproduciendo: " + files[num].name);*/
+	  console.log("reproduciendo: " + files[num].name);*/
 	var num = parseInt(num_str);
 	var el = document.querySelector('audio');
 	if(el != null){
 	    console.log(el);
 	    el.parentNode.removeChild(el);
 	}
-
+	//ponemos a reproducir el elemento num de la lista <ol>
 	files[num].appendTo('body');
-	//var num = parseInt(index);
-	//console.log(num.toString());
-	//alert(clicada.innerHTML);
-	//	return num;
     }
 }
 
@@ -77,6 +61,8 @@ function onTorrent(torrent){
 
 function update(){
     torrents = client.torrents;
+
+    //añadimos a la cola de archivos los archivos del nuevo torrent.
     torrents.forEach(function (torr){
 	fil = torr.files;
 	fil.forEach(function (f){
