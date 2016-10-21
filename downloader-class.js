@@ -2,22 +2,22 @@
 //author @rafaelleru
 
 function Downloader(){
-    console.log('Holaaaa');
+//    console.log('Holaaaa');
     this._torrentsArray = [];
 };
 
 Downloader.prototype.startDownload = function() {
-    console.log("hola");
-    this.client = client.add( this.torrent, function(){
-	console.log("algoo");
-    });
+//    console.log("hola");
+    if ( typeof this.torrent != 'Undefined' ) {
+	this.client = client.add( this.torrent, function(){
+	    console.log("algoo");
+	});
+    }
 };
 
 Downloader.prototype.addTorrent = function(torrent){
     this.torrentsArray.push(torrent);
-    if(torrentsArray.length != 0){
-	this.client.add(this.torrentsArray[this.torrentsArray.length]);
-    };
+    this.client.add(torrent);
 };
 
 Downloader.prototype.setFileMorePriority = function(file) {
