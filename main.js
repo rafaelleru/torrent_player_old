@@ -57,10 +57,10 @@ app.on('activate', function() {
 
 
 var ipc = require('electron').ipcMain;
-var Downloader = require('./downloader-class.js');
+var Downloader = require("./downloader-class.js").Downloader;
 
-var downloaderInstance = new Downloader;
+var downloaderInstance = new Downloader();
 
 ipc.on('addTorrent', function(event, data){
     downloaderInstance.addTorrent(data);
-});
+})
