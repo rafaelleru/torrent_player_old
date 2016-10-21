@@ -3,7 +3,7 @@ var client = new WebTorrent()
 var files = []
 var reproduciendo = require('stream')
 
-module.exports={ 
+module.exports={
     addTorrent:function addTorrent(torrentID){
 	client.add(torrentID, function(torrent) {
 	    //añadimos el torrent al cliente, y actualizamos la interfaz.
@@ -55,11 +55,12 @@ function listenClick(files){
 }
 
 setInterval(function() {
-    var element = document.getElementById("progress");
+    var element = document.getElementById("progress-bar");
   //  var torrents_ = client.torrents;
 
     client.torrents.forEach( function(c){
-	element.innerHTML = c.progress;
+	element.style.width = c.progress;
+    element.innerHTML = c.progress;
     });
 
 //    element.innerHTML = torrents_[0].progress
@@ -70,7 +71,7 @@ function selectNextFile(num){
 
 function getEventTarget(e) {
     e = e || window.event;
-    return e.target || e.srcElement; 
+    return e.target || e.srcElement;
 }
 
 function onTorrent(torrent){
@@ -93,8 +94,8 @@ function update(){
     if(reproduciendo == null){
 	reproduciendo = files[3].appendTo('body')
     }
-    
-    //files = client.getTorrent(1).files; 
+
+    //files = client.getTorrent(1).files;
     rellenarLista(files);
     listenClick(files);
 }
