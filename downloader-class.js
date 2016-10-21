@@ -14,9 +14,9 @@ Downloader.prototype.startDownload = function() {
 };
 
 Downloader.prototype.addTorrent = function(torrent){
-    this.torrentsArray.push(torrent);
-    if(torrentsArray.length != 0){
-	this.client.add(this.torrentsArray[this.torrentsArray.length]);
+    this._torrentsArray.push(torrent);
+    if(this._torrentsArray.length != 0){
+	this.client.add(this._torrentsArray[this._torrentsArray.length]);
     };
 };
 
