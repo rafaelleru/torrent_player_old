@@ -3,7 +3,7 @@ var client = new WebTorrent()
 var files = []
 var reproduciendo = require('stream')
 
-module.exports={ 
+module.exports={
     addTorrent:function addTorrent(torrentID){
 	client.add(torrentID, function(torrent) {
 	    //añadimos el torrent al cliente, y actualizamos la interfaz.
@@ -22,8 +22,12 @@ function rellenarLista(files) {
 	//le asignamos un id a cada elemento de la lista para referenciarlos luego
 	texto.setAttribute("id", "item_"+i.toString());
 	//console.log(files[i])
-        texto.innerHTML = files[i].name;
-        bloque.appendChild(texto);
+        var nombreFichero = files[i].name;
+        var nombreLength = files[i].name.lenght;
+        if(nombreFichero.includes('.mp3', nombreLength-4)){
+            texto.innerHTML = nombreFichero;
+            bloque.appendChild(texto);
+        }
     }
 }
 
@@ -34,32 +38,33 @@ function rellenarLista(files) {
 function listenClick(files){
     var lista = document.getElementById("songs_queue")
     lista.onclick = function(e){
-	var clicada = getEventTarget(e);
-	var index = clicada.id;
-	var num_str = index.replace("item_", "");
-	/*console.log(num_str);
-	  console.log("reproduciendo: " + files[num].name);*/
-	var num = parseInt(num_str);
-	var el = document.querySelector('audio');
-	if(el != null){
-	    console.log(el);
-	    el.parentNode.removeChild(el);
-	}
-	//ponemos a reproducir el elemento num de la lista <ol>
-	//reproduciendo = files[num].createReadStream();
-	// hay que poner el stream para que sea lo que se reproduzca
-	console.log(files[num].name)
-	selectNextFile(num);
-	files[num].appendTo('body');
+    	var clicada = getEventTarget(e);
+    	var index = clicada.id;
+    	var num_str = index.replace("item_", "");
+    	/*console.log(num_str);
+    	  console.log("reproduciendo: " + files[num].name);*/
+    	var num = parseInt(num_str);
+    	var el = document.querySelector('audio');
+    	if(el != null){
+    	    console.log(el);
+    	    el.parentNode.removeChild(el);
+	       }
+    	//ponemos a reproducir el elemento num de la lista <ol>
+    	//reproduciendo = files[num].createReadStream();
+    	// hay que poner el stream para que sea lo que se reproduzca
+    	console.log(files[num].name)
+    	selectNextFile(num);
+    	files[num].appendTo('body');
     }
 }
 
 setInterval(function() {
-    var element = document.getElementById("progress");
+    var element = document.getElementById("progress-bar");
   //  var torrents_ = client.torrents;
 
     client.torrents.forEach( function(c){
-	element.innerHTML = c.progress;
+	element.style.width = c.progress;
+    element.innerHTML = c.progress;
     });
 
 //    element.innerHTML = torrents_[0].progress
@@ -70,7 +75,7 @@ function selectNextFile(num){
 
 function getEventTarget(e) {
     e = e || window.event;
-    return e.target || e.srcElement; 
+    return e.target || e.srcElement;
 }
 
 function onTorrent(torrent){
@@ -93,8 +98,8 @@ function update(){
     if(reproduciendo == null){
 	reproduciendo = files[3].appendTo('body')
     }
-    
-    //files = client.getTorrent(1).files; 
+
+    //files = client.getTorrent(1).files;
     rellenarLista(files);
     listenClick(files);
 }
