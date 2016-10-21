@@ -58,13 +58,14 @@ app.on('activate', function() {
 
 var ipc = require('electron').ipcMain;
 const Downloader = require("./downloader-class.js");
-var updater = require("./mainWindowUpdater.js");
+var Updater = require("./mainWindowUpdater.js");
 
 var downloaderInstance = new Downloader();
+var updaterInstance = new Updater();
 
 ipc.on('addTorrent', function(event, data){
     downloaderInstance.addTorrent(data);
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
-    updater.reloadList(downloaderInstance.getFiles());
+    updaterInstance.reloadList(downloaderInstance.getFiles());
 })
