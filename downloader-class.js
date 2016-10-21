@@ -3,8 +3,8 @@
 
 var downloader = Downloader.prototype;
 
-function Downloader(_torrent){
-    this.torrent = _torrent;
+function Downloader(){
+    this._torrentsArray = []
 }
 
 Downloader.startDownload() = function() {
@@ -13,6 +13,12 @@ Downloader.startDownload() = function() {
     })
 }
 
+Downloader.addTorrent(torrent){
+    this.torrentsArray.push(torrent);
+    if(torrentsArray.length != 0){
+	this.client.add(this.torrentsArray[this.torrentsArray.length]);
+    }
+}
 
 Downloader.setFileMorePriority = function(file) {
     this.client.files[file].select();
