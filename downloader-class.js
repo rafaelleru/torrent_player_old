@@ -8,7 +8,7 @@ function Downloader(){
 
 Downloader.prototype.startDownload = function(torrent) {
 //    console.log("hola");
-    this.client = client.add( this.torrent, function(){
+    this.client = client.add( torrent, function(){
 	console.log("algoo");
     });
 };
