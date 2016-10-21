@@ -64,6 +64,7 @@ setInterval(function() {
 
 //    element.innerHTML = torrents_[0].progress
 }, 1000) // Se actualiza cada 1 segundo.
+
 function selectNextFile(num){
     files[num+1].select();
 }
