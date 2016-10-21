@@ -11,13 +11,14 @@ function Downloader(){
 
 Downloader.prototype.startDownload = function(torrent) {
     this.client = client.add( torrent, function(){
-	console.log("algoo");
     });
 };
 
 Downloader.prototype.addTorrent = function(torrent){
     this._torrentsArray.push(torrent);
     if(this._torrentsArray.length != 0){
+        	console.log("algoo");
+
 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
     };
 };
