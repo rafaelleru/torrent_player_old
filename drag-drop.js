@@ -1,7 +1,8 @@
 var dragDrop = require('drag-drop/buffer')
 var downloader = require('./downloader.js')
+var ipc = require('electron').ipcRenderer;
 
 dragDrop(document.getElementById("draganddrop"), function(files){
     //downloader.addTorrent(torrent)
-    files.forEach((file) => downloader.addTorrent(file))
-})
+    ipc.send('addTorrent', files);
+}
