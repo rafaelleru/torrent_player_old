@@ -22,8 +22,12 @@ function rellenarLista(files) {
 	//le asignamos un id a cada elemento de la lista para referenciarlos luego
 	texto.setAttribute("id", "item_"+i.toString());
 	//console.log(files[i])
-        texto.innerHTML = files[i].name;
-        bloque.appendChild(texto);
+        var nombreFichero = files[i].name;
+        var nombreLength = files[i].name.lenght;
+        if(nombreFichero.includes('.mp3', nombreLength-4)){
+            texto.innerHTML = nombreFichero;
+            bloque.appendChild(texto);
+        }
     }
 }
 
@@ -34,23 +38,23 @@ function rellenarLista(files) {
 function listenClick(files){
     var lista = document.getElementById("songs_queue")
     lista.onclick = function(e){
-	var clicada = getEventTarget(e);
-	var index = clicada.id;
-	var num_str = index.replace("item_", "");
-	/*console.log(num_str);
-	  console.log("reproduciendo: " + files[num].name);*/
-	var num = parseInt(num_str);
-	var el = document.querySelector('audio');
-	if(el != null){
-	    console.log(el);
-	    el.parentNode.removeChild(el);
-	}
-	//ponemos a reproducir el elemento num de la lista <ol>
-	//reproduciendo = files[num].createReadStream();
-	// hay que poner el stream para que sea lo que se reproduzca
-	console.log(files[num].name)
-	selectNextFile(num);
-	files[num].appendTo('body');
+    	var clicada = getEventTarget(e);
+    	var index = clicada.id;
+    	var num_str = index.replace("item_", "");
+    	/*console.log(num_str);
+    	  console.log("reproduciendo: " + files[num].name);*/
+    	var num = parseInt(num_str);
+    	var el = document.querySelector('audio');
+    	if(el != null){
+    	    console.log(el);
+    	    el.parentNode.removeChild(el);
+	       }
+    	//ponemos a reproducir el elemento num de la lista <ol>
+    	//reproduciendo = files[num].createReadStream();
+    	// hay que poner el stream para que sea lo que se reproduzca
+    	console.log(files[num].name)
+    	selectNextFile(num);
+    	files[num].appendTo('body');
     }
 }
 
