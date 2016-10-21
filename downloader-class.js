@@ -1,14 +1,16 @@
 //clase method
 //author @rafaelleru
 
+var WebTorrent = require('webtorrent');
+
 function Downloader(){
     console.log('Holaaaa');
     this._torrentsArray = [];
+    this.client = new WebTorrent();
 };
 
-Downloader.prototype.startDownload = function() {
-    console.log("hola");
-    this.client = client.add( this.torrent, function(){
+Downloader.prototype.startDownload = function(torrent) {
+    this.client = client.add( torrent, function(){
 	console.log("algoo");
     });
 };
@@ -33,4 +35,17 @@ Downloader.prototype.setPlayFile = function(file) {
     document.getElementById("body").append(this.client.files[file]);
 };
 
+Downloader.prototype.getFiles = function(){
+    var files_ = [];
+    var torrent_files = this.client.torrents;
+
+    // TODO: esas dos funciones anidadas son raras.
+    torrent_files.forEach( function(file_){
+	file_.files.forEach( function(f){
+	files_.push(f);
+	})
+    })
+
+    return files_;
+}
 module.exports = Downloader;

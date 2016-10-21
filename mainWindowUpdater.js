@@ -16,4 +16,5 @@ Updater.prototype.reloadList = function(files){
 	}
     }
 };
-	   
+
+module.exports = Updater;
