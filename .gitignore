@@ -5,3 +5,4 @@ node_modules
 
 #cosa mia no rayarse
 *.org
+/npm-debug.log
