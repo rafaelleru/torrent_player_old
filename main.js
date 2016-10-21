@@ -65,7 +65,4 @@ var updaterInstance = new Updater();
 
 ipc.on('addTorrent', function(event, data){
     downloaderInstance.addTorrent(data);
-    // TODO: No se si esto va aqui
-    // TODO: ni si es la mejor forma de obtener los archivos.
-    updaterInstance.reloadList(downloaderInstance.getFiles());
 })
