@@ -2,9 +2,16 @@ Rafa Leyva Ruiz
 
 Pa yo organizarme
 
-* TASK hacer que el html acepte un torrent
-* TASK hacer que descargue torrent multifile
+* DONE hacer que el html acepte un torrent
+  CLOSED: [2016-10-17 lun 16:50]
+* DONE hacer que descargue torrent multifile
+  CLOSED: [2016-10-13 jue 10:53]
 * TASK seleccionar orden en que se descargan los files
-* TASK que no salga el reproducctor de video, mas bien una cosilla chica
+* DONE que no salga el reproducctor de video, mas bien una cosilla chica
+  CLOSED: [2016-10-13 jue 10:53]
 * TASK [#C] trastear con el css
-* TASK 
+* DONE [[https://github.com/feross/webtorrent/issues/942][destruir elemento (lo de ahora es una chapuza]]
+  CLOSED: [2016-10-17 lun 16:50]
+* TASK Crear cola de torrents
+* TASK enviar SJON desde javascript a python
+* TASK leer JSON lleno de magnets para reproducir.

@@ -1,7 +1,7 @@
 var WebTorrent = require('webtorrent')
 var client = new WebTorrent()
 var files = []
-var reproduciendo
+var reproduciendo = require('stream')
 
 module.exports={ 
     addTorrent:function addTorrent(torrentID){
@@ -46,8 +46,26 @@ function listenClick(files){
 	    el.parentNode.removeChild(el);
 	}
 	//ponemos a reproducir el elemento num de la lista <ol>
+	//reproduciendo = files[num].createReadStream();
+	// hay que poner el stream para que sea lo que se reproduzca
+	console.log(files[num].name)
+	selectNextFile(num);
 	files[num].appendTo('body');
     }
+}
+
+setInterval(function() {
+    var element = document.getElementById("progress");
+  //  var torrents_ = client.torrents;
+
+    client.torrents.forEach( function(c){
+	element.innerHTML = c.progress;
+    });
+
+//    element.innerHTML = torrents_[0].progress
+}, 1000) // Se actualiza cada 1 segundo.
+function selectNextFile(num){
+    files[num+1].select();
 }
 
 function getEventTarget(e) {
@@ -64,6 +82,7 @@ function update(){
 
     //añadimos a la cola de archivos los archivos del nuevo torrent.
     torrents.forEach(function (torr){
+	console.log(torr.progress);
 	fil = torr.files;
 	fil.forEach(function (f){
 	    console.log(f.toString() );
