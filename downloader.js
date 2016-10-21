@@ -20,13 +20,17 @@ function rellenarLista(files) {
     for (var i = 0; i < files.length; i++) {
         var texto = document.createElement("li");
 	//le asignamos un id a cada elemento de la lista para referenciarlos luego
-	texto.setAttribute("id", "item_"+i.toString());
+	   texto.setAttribute("id", "item_"+i.toString());
 	//console.log(files[i])
         var nombreFichero = files[i].name;
         var nombreLength = files[i].name.lenght;
         if(nombreFichero.includes('.mp3', nombreLength-4)){
             texto.innerHTML = nombreFichero;
             bloque.appendChild(texto);
+        }
+        else if(nombreFichero.includes('.jpg',nombreLength-4) || nombreFichero.includes('.jpeg',nombreLength-5)){
+            document.body.style.backgroundImage = "url('"+files[i].path+"')";
+            console.log("Imagen en background");
         }
     }
 }
@@ -63,12 +67,14 @@ setInterval(function() {
   //  var torrents_ = client.torrents;
 
     client.torrents.forEach( function(c){
-	element.style.width = c.progress;
-    element.innerHTML = c.progress;
-    });
+	       element.style.width = c.progress*100+"%";
+           element.style.backgroundColor = "red";
+           console.log(c.progress);
+       });
 
 //    element.innerHTML = torrents_[0].progress
 }, 1000) // Se actualiza cada 1 segundo.
+
 function selectNextFile(num){
     files[num+1].select();
 }
