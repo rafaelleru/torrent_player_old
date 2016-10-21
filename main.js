@@ -57,7 +57,7 @@ app.on('activate', function() {
 
 
 var ipc = require('electron').ipcMain;
-var Downloader = require("./downloader-class.js").Downloader;
+const Downloader = require("./downloader-class.js");
 
 var downloaderInstance = new Downloader();
 

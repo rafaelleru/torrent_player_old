@@ -6,14 +6,14 @@ function Downloader(){
     this._torrentsArray = [];
 };
 
-Downloader.prototype.startDownload() = function() {
+Downloader.prototype.startDownload = function() {
     console.log("hola");
     this.client = client.add( this.torrent, function(){
 	console.log("algoo");
     });
 };
 
-Downloader.prototype.addTorrent(torrent) = function(torrent){
+Downloader.prototype.addTorrent = function(torrent){
     this.torrentsArray.push(torrent);
     if(torrentsArray.length != 0){
 	this.client.add(this.torrentsArray[this.torrentsArray.length]);
@@ -23,7 +23,7 @@ Downloader.prototype.addTorrent(torrent) = function(torrent){
 Downloader.prototype.setFileMorePriority = function(file) {
     this.client.files[file].select();
 };
-
+nnn
 Downloader.prototype.setFileBuffer = function(file) {
     stream  = this.client.files[file].getBuffer();
     //poner a reproducir el buffer
