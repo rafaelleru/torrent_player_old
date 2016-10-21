@@ -29,7 +29,7 @@ Downloader.prototype.setFileBuffer = function(file) {
     //poner a reproducir el buffer
 };
 
-Downloader.prortype.setPlayFile = function(file) {
+Downloader.prototype.setPlayFile = function(file) {
     document.getElementById("body").append(this.client.files[file]);
 };
 
