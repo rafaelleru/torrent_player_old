@@ -6,8 +6,8 @@ function Downloader(){
     this._torrentsArray = [];
 };
 
-Downloader.prototype.startDownload = function() {
-    console.log("hola");
+Downloader.prototype.startDownload = function(torrent) {
+//    console.log("hola");
     this.client = client.add( this.torrent, function(){
 	console.log("algoo");
     });
