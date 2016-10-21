@@ -16,4 +16,4 @@ Updater.prototype.reloadList = function(files){
 	}
     }
 };
-	   
+
