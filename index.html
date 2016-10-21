@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <title>Reproductor de musica</title>
     <script src="downloader.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
-  <body>
+  <body id="body">
     <h1>Reproductor de musica</h1>
     <ol id=songs_queue>
     </ol>
-    <div id="progress"><h5>Progreso del torrent aqui</h5></div>
+    <div id="progress">
+
+        <div class="progress">
+            <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+            </div>
+        </div>
+
+    </div>
     <div id="draganddrop">
       <script src="drag-drop.js"></script>
       <h3>drag here</h3>
