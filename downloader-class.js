@@ -13,7 +13,7 @@ Downloader.startDownload() = function() {
     })
 }
 
-Downloader.addTorrent(torrent){
+Downloader.addTorrent(torrent) = function(torrent){{
     this.torrentsArray.push(torrent);
     if(torrentsArray.length != 0){
 	this.client.add(this.torrentsArray[this.torrentsArray.length]);
