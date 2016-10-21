@@ -36,11 +36,16 @@ Downloader.prototype.setPlayFile = function(file) {
 };
 
 Downloader.prototype.getFiles = function(){
-    var files = [];
-    client.torrents.files.forEach( function(f){
-	files.push(f);
+    var files_ = [];
+    var torrent_files = this.client.torrents;
+
+    // TODO: esas dos funciones anidadas son raras.
+    torrent_files.forEach( function(file_){
+	file_.files.forEach( function(f){
+	files_.push(f);
+	})
     })
 
-    return files;
+    return files_;
 }
 module.exports = Downloader;
