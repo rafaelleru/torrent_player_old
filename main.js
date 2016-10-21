@@ -63,4 +63,4 @@ var downloaderInstance = new Downloader;
 
 ipc.on('addTorrent', function(event, data){
     downloaderInstance.addTorrent(data);
-}
+});
