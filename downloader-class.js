@@ -1,10 +1,12 @@
 //clase method
 //author @rafaelleru
 
+var WebTorrent = require('webtorrent');
+
 function Downloader(){
     console.log('Holaaaa');
     this._torrentsArray = [];
-    this.client = new WebTorrent
+    this.client = new WebTorrent();
 };
 
 Downloader.prototype.startDownload = function(torrent) {
