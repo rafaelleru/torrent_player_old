@@ -23,7 +23,7 @@ Downloader.prototype.addTorrent = function(torrent){
 Downloader.prototype.setFileMorePriority = function(file) {
     this.client.files[file].select();
 };
-nnn
+
 Downloader.prototype.setFileBuffer = function(file) {
     stream  = this.client.files[file].getBuffer();
     //poner a reproducir el buffer
