@@ -73,7 +73,6 @@ ipc.on('addTorrent', function(event, data){
 })
 
 ipc.on('playRequest', function(event, data){
-    console.log('se ha solicitado reproducir ' + data.toString() + ' que es de tipo: ' + data.typeof);
-//    downloaderInstance.getFileToPlay(data);
-    
+    console.log('se ha solicitado reproducir ' + data.toString());
+    event.sender.send('toPlay', downloaderInstance.getFileToPlay(data));
 })

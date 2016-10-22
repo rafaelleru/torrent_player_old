@@ -52,4 +52,11 @@ Downloader.prototype.getFiles = function(){
 
     return files_;
 }
+
+// TODO: Buscar nombre mejor para la variable i
+
+Downloader.prototype.getFileToPlay = function(i){
+    return this.client.torrents[0].files[i];
+}
+
 module.exports = Downloader;
