@@ -9,6 +9,16 @@ function Updater(){
 
 Updater.prototype.reloadList = function(files){
     for(var i=0; i < files.length; i++){
+
+        console.log(i);
+        var list_element = document.createElement('li');
+        texto.setAttribute('id', 'item_'+ i.toString());
+
+        if(files[i].name.includes('mp3',files[i].name.length - 4)){
+            list_element.innerHTML=files[i].name;
+            this.list_div.appendChild(list_element);
+        }
+
 	var list_element = document.createElement('li');
 	list_element.setAttribute('id', 'item_'+ i.toString());
 	list_element.onclick = requestPlay(i);
@@ -17,6 +27,7 @@ Updater.prototype.reloadList = function(files){
 	    list_element.innerHTML = files[i].name;
 	    this.list_div.appendChild(list_element);
 	}
+
     }
 };
 
