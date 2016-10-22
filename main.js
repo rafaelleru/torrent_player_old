@@ -59,7 +59,7 @@ app.on('activate', function() {
 var ipc = require('electron').ipcMain;
 
 const Downloader = require("./downloader.js");
-var updater = require("./mainWindowUpdater.js");
+var Updater = require("./mainWindowUpdater.js");
 
 var downloaderInstance = new Downloader();
 var updaterInstance = new Updater();
