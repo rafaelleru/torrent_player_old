@@ -10,6 +10,16 @@
   <body id="body">
     <h1>Reproductor de musica</h1>
     <ol id=songs_queue>
+      <script>
+	var Updater = require("./mainWindowUpdater.js");
+	var instance = new Updater();
+
+	ipcRenderer.on('updatePlayList', (event, files) => {
+	instance.reloadList(files);
+	})
+      </script>
+      <!-- aqui tiene que ir el updater-->
+      <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
     </ol>
     <div id="progress">
 
