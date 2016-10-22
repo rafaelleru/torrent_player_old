@@ -10,7 +10,7 @@ function Downloader(){
 };
 
 Downloader.prototype.startDownload = function(torrent) {
-    this.client = client.add( torrent, function(){
+    this.client.add( torrent, function(){
 	console.log("algoo");
     });
 };
