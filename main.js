@@ -68,6 +68,6 @@ ipc.on('addTorrent', function(event, data){
     data.forEach((file) => downloaderInstance.addTorrent(file));
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
-    updater.prototype.reloadList(downloaderInstance.getFiles());
+    event.sender.send('updatePlayList', downloaderInstance.getFiles());
     // actualizar el prototipo no suele serlo... 
 })
