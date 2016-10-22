@@ -57,7 +57,7 @@ app.on('activate', function() {
 
 
 var ipc = require('electron').ipcMain;
-const Downloader = require("./downloader-class.js");
+const Downloader = require("./downloader.js");
 var updater = require("./mainWindowUpdater.js");
 
 var downloaderInstance = new Downloader();
@@ -67,4 +67,5 @@ ipc.on('addTorrent', function(event, data){
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
     updater.prototype.reloadList(downloaderInstance.getFiles());
+    // actualizar el prototipo no suele serlo... 
 })
