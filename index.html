@@ -13,7 +13,6 @@
       <script>
 	var Updater = require("./mainWindowUpdater.js");
 	var instance = new Updater();
-	const {ipcRenderer} = require('electron');
 
 	ipcRenderer.on('updatePlayList', (event, files) => {
 	instance.reloadList(files);
