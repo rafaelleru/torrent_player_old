@@ -12,7 +12,7 @@ Updater.prototype.reloadList = function(files){
 
         console.log(i);
         var list_element = document.createElement('li');
-        texto.setAttribute('id', 'item_'+ i.toString());
+        list_element.setAttribute('id', 'item_'+ i.toString());
 
         if(files[i].name.includes('mp3',files[i].name.length - 4)){
             list_element.innerHTML=files[i].name;
