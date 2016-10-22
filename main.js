@@ -65,7 +65,7 @@ var downloaderInstance = new Downloader();
 var updater = require("./mainWindowUpdater.js");
 
 ipc.on('addTorrent', function(event, data){
-    downloaderInstance.addTorrent(data);
+    data.forEach((file) => downloaderInstance.addTorrent(file));
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
     updater.prototype.reloadList(downloaderInstance.getFiles());
