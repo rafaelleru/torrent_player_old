@@ -71,3 +71,9 @@ ipc.on('addTorrent', function(event, data){
     event.sender.send('updatePlayList', downloaderInstance.getFiles());
     // actualizar el prototipo no suele serlo... 
 })
+
+ipc.on('playRequest', function(event, data){
+    console.log('se ha solicitado reproducir ' + data.toString() + ' que es de tipo: ' + data.typeof);
+//    downloaderInstance.getFileToPlay(data);
+    
+})
