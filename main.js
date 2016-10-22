@@ -62,7 +62,7 @@ const Downloader = require("./downloader.js");
 var Updater = require("./mainWindowUpdater.js");
 
 var downloaderInstance = new Downloader();
-var updaterInstance = new Updater();
+var updater = require("./mainWindowUpdater.js");
 
 ipc.on('addTorrent', function(event, data){
     downloaderInstance.addTorrent(data);
