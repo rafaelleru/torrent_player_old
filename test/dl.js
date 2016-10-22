@@ -1,7 +1,7 @@
 const  
 fixtures = require('webtorrent-fixtures'),
 should= require("should"),
-downloader = require("../downloader-class.js");
+downloader = require("../downloader.js");
 
 describe( "Crea un objeto y añade torrent", function() {
   var dl = new downloader();

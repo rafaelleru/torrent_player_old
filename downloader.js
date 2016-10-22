@@ -1,111 +1,55 @@
-var WebTorrent = require('webtorrent')
-var client = new WebTorrent()
-var files = []
-var reproduciendo = require('stream')
+//clase method
+//author @rafaelleru
 
-module.exports={
-    addTorrent:function addTorrent(torrentID){
-	client.add(torrentID, function(torrent) {
-	    //añadimos el torrent al cliente, y actualizamos la interfaz.
-	    update();
-	})
-    }
-}
-/**
- * muestra una lista de las canciones
-* @param files archivos del torrent
-*/
-function rellenarLista(files) {
-    var bloque = document.getElementById("songs_queue");
-    for (var i = 0; i < files.length; i++) {
-        var texto = document.createElement("li");
-	//le asignamos un id a cada elemento de la lista para referenciarlos luego
-	   texto.setAttribute("id", "item_"+i.toString());
-	//console.log(files[i])
-        var nombreFichero = files[i].name;
-        var nombreLength = files[i].name.lenght;
-        if(nombreFichero.includes('.mp3', nombreLength-4)){
-            texto.innerHTML = nombreFichero;
-            bloque.appendChild(texto);
-        }
-        else if(nombreFichero.includes('.jpg',nombreLength-4) || nombreFichero.includes('.jpeg',nombreLength-5)){
-            document.body.style.backgroundImage = "url('"+files[i].path+"')";
-            console.log("Imagen en background");
-        }
-    }
-}
+var WebTorrent = require('webtorrent');
 
-/**
-* funcion que comprueba si hay click en algun elemento de la lista de canciones
-* @param files los archivos del torrent
-*/
-function listenClick(files){
-    var lista = document.getElementById("songs_queue")
-    lista.onclick = function(e){
-    	var clicada = getEventTarget(e);
-    	var index = clicada.id;
-    	var num_str = index.replace("item_", "");
-    	/*console.log(num_str);
-    	  console.log("reproduciendo: " + files[num].name);*/
-    	var num = parseInt(num_str);
-    	var el = document.querySelector('audio');
-    	if(el != null){
-    	    console.log(el);
-    	    el.parentNode.removeChild(el);
-	       }
-    	//ponemos a reproducir el elemento num de la lista <ol>
-    	//reproduciendo = files[num].createReadStream();
-    	// hay que poner el stream para que sea lo que se reproduzca
-    	console.log(files[num].name)
-    	selectNextFile(num);
-    	files[num].appendTo('body');
-    }
-}
+function Downloader(){
+//    console.log('Holaaaa');
+    this._torrentsArray = [];
+    this.client = new WebTorrent();
+};
 
-setInterval(function() {
-    var element = document.getElementById("progress-bar");
-  //  var torrents_ = client.torrents;
 
-    client.torrents.forEach( function(c){
-	       element.style.width = c.progress*100+"%";
-           element.style.backgroundColor = "red";
-           console.log(c.progress);
-       });
+Downloader.prototype.startDownload = function(torrent) {
+    this.client = client.add( torrent, function(){
+    });
+};
 
-//    element.innerHTML = torrents_[0].progress
-}, 1000) // Se actualiza cada 1 segundo.
+Downloader.prototype.addTorrent = function(torrent){
+    this._torrentsArray.push(torrent);
+    this.client.add(torrent); // esto debería ser lo mismo que lo de abajo
+//    console.log("Añadido");
+    // if(this._torrentsArray.length != 0){
+    // 	console.log("algoo");	
+    // 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
+    // };
 
-function selectNextFile(num){
-    files[num+1].select();
-}
+};
 
-function getEventTarget(e) {
-    e = e || window.event;
-    return e.target || e.srcElement;
-}
+Downloader.prototype.setFileMorePriority = function(file) {
+    this.client.files[file].select();
+};
 
-function onTorrent(torrent){
-    client.download()
-}
+Downloader.prototype.setFileBuffer = function(file) {
+    stream  = this.client.files[file].getBuffer();
+    //poner a reproducir el buffer
+};
 
-function update(){
-    torrents = client.torrents;
+Downloader.prototype.setPlayFile = function(file) {
+    document.getElementById("body").append(this.client.files[file]);
+};
 
-    //añadimos a la cola de archivos los archivos del nuevo torrent.
-    torrents.forEach(function (torr){
-	console.log(torr.progress);
-	fil = torr.files;
-	fil.forEach(function (f){
-	    console.log(f.toString() );
-	    files.push(f);
+Downloader.prototype.getFiles = function(){
+    var files_ = [];
+    var torrent_files = this.client.torrents;
+
+    // TODO: esas dos funciones anidadas son raras.
+    torrent_files.forEach( function(file_){
+	file_.files.forEach( function(f){
+	files_.push(f);
 	})
     })
 
-    if(reproduciendo == null){
-	reproduciendo = files[3].appendTo('body')
-    }
-
-    //files = client.getTorrent(1).files;
-    rellenarLista(files);
-    listenClick(files);
+    return files_;
 }
+module.exports = Downloader;
