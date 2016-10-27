@@ -62,11 +62,13 @@ Downloader.prototype.getFileToPlay = function(i){
 }
 
 Downloader.prototype.getLastFiles = function(){
-    var torrent_file =  this.client.torrents[this.client.torrents.length - 1];
-    torrent_file.files.forEach( function(f){
+    var las_torrent = this.client.torrents[0];
+
+    las_torrent.files.forEach( function (f) {
 	console.log(f.name);
     })
-    return torrent_file.files;
+
+    return las_torrent.files;
 }
 
 module.exports = Downloader;

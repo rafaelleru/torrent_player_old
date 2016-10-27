@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <title>Reproductor de musica</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
   </head>
   <body id="body">
+    <script>
+      var Updater = require('./mainWindowUpdater');
+      var instance = new Updater();
+      var ipc = require('electron').ipcRenderer;
+      ipc.on('updatePlayList', function(event, data){
+      console.log('he recibido el mensaje "updatePlayList"');
+      instance.reloadList(data);
+      console.log('he recargado el html');
+      })
+    </script>
+
     <h1>Reproductor de musica</h1>
     <ol id=songs_queue>
-      <!-- aqui tiene que ir el updater-->
-      <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
-      <script>
-	var Updater = require('./mainWindowUpdater');
-	var instance = new Updater();
-	var ipc = require('electron').ipcRenderer;
-	ipc.on('updatePlayList', function(event, data){
-	console.log('he recibido el mensaje "updatePlayList"');
-	instance.reloadList(data);
-	console.log('he recargado el html');
-	})
-      </script>
     </ol>
     <div id="progress">
         <div class="progress">

@@ -19,7 +19,7 @@ function createWindow() {
     mainWindow.loadURL(`file://${__dirname}/index.html`)
 
     // Open the DevTools.
-    //mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
@@ -69,7 +69,7 @@ ipc.on('addTorrent', function(event, data){
 
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
-    //console.log('actualizo el HTML');
+    console.log('actualizo el HTML');
     // actualizar el prototipo no suele serlo... 
 })
 
