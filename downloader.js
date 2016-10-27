@@ -17,12 +17,10 @@ Downloader.prototype.startDownload = function(torrent) {
 
 Downloader.prototype.addTorrent = function(torrent){
     this._torrentsArray.push(torrent);
-    this.client.add(torrent); // esto debería ser lo mismo que lo de abajo
-//    console.log("Añadido");
-    // if(this._torrentsArray.length != 0){
-    // 	console.log("algoo");	
-    // 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
-    // };
+    this.client.add(torrent, function(torrent){
+	console.log(torrent.infoHash);
+    }); // esto debería ser lo mismo que lo de abajo
+
 
 };
 
@@ -51,5 +49,11 @@ Downloader.prototype.getFiles = function(){
     })
 
     return files_;
+}
+
+Downloader.prototype.getLastFiles = function(){
+    var torrent = this.client.torrents[this.client.torrents.length -1];
+    //console.log(torrent.infoHash);
+    console.log(torrent.files.length);
 }
 module.exports = Downloader;
