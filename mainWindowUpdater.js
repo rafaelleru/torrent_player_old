@@ -8,7 +8,12 @@ function Updater(){
 
 Updater.prototype.reloadList = function(files){
     //console.log('actualizo el html con los archivos del torrent');
-        this.list_div = document.getElementById('songs_queue');
+    console.log(files.length);
+
+    files.forEach(function(f){
+	console.log(f.name);
+    })
+    this.list_div = document.getElementById('songs_queue');
 
     for(var i=0; i < files.length; i++){ 
 	//console.log(i);
@@ -37,7 +42,8 @@ function requestPlay(i){
     ipcRenderer.send('playRequest', i);
     ipcRenderer.on('toPlay', (event, file) => {
 	console.log('voy a intentar reproducir a ver que pasa');
-	//file.appendTo('body');
+	console.log(file.typeof);
+	file.appendTo('body');
     })
 }
     

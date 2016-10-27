@@ -7,6 +7,7 @@ function Downloader(){
 //    console.log('Holaaaa');
     this._torrentsArray = [];
     this.client = new WebTorrent();
+    this.tID;
 };
 
 
@@ -19,7 +20,7 @@ Downloader.prototype.startDownload = function(torrent) {
 Downloader.prototype.addTorrent = function(torrent){
     this._torrentsArray.push(torrent);
     this.client.add(torrent); // esto debería ser lo mismo que lo de abajo
-    console.log("Añadido");
+    console.log(this.client.torrents.length);
     // if(this._torrentsArray.length != 0){
     // 	console.log("algoo");	
     // 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
@@ -55,20 +56,13 @@ Downloader.prototype.getFiles = function(){
   return files_;
 }
 
-// TODO: Buscar nombre mejor para la variable i
+// TODO: No va ninguna de las dos
 
 Downloader.prototype.getFileToPlay = function(i){
-    return this.client.torrents[0].files[i];
-}
+    torr = this.client.torrents;
+   }
 
-Downloader.prototype.getLastFiles = function(){
-    var las_torrent = this.client.torrents[0];
+Downloader.prototype.getLastFiles = function(){}
 
-    las_torrent.files.forEach( function (f) {
-	console.log(f.name);
-    })
-
-    return las_torrent.files;
-}
 
 module.exports = Downloader;

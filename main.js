@@ -64,7 +64,8 @@ var downloaderInstance = new Downloader();
 
 ipc.on('addTorrent', function(event, data){
     data.forEach((file) => downloaderInstance.addTorrent(file));
-    files = downloaderInstance.getLastFiles();
+    files = [];
+    files = downloaderInstance.getFiles();
     event.sender.send('updatePlayList', files);
 
     // TODO: No se si esto va aqui
@@ -75,6 +76,8 @@ ipc.on('addTorrent', function(event, data){
 
 ipc.on('playRequest', function(event, data){
     console.log('se ha solicitado reproducir ' + data.toString());
+    console.log(data);
+    console.log(downloaderInstance.getFileToPlay(data).typeof);
     event.sender.send('toPlay', downloaderInstance.getFileToPlay(data));
 })
  
