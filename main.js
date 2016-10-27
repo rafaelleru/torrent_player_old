@@ -64,7 +64,8 @@ var downloaderInstance = new Downloader();
 
 ipc.on('addTorrent', function(event, data){
     data.forEach((file) => downloaderInstance.addTorrent(file));
-    event.sender.send('updatePlayList', downloaderInstance.getFiles());
+    files = downloaderInstance.getLastFiles();
+    event.sender.send('updatePlayList', files);
 
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
