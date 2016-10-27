@@ -11,7 +11,8 @@ function Downloader(){
 
 
 Downloader.prototype.startDownload = function(torrent) {
-    this.client = client.add( torrent, function(){
+// está bien esta función vacía? - JJ
+ this.client = client.add( torrent, function(){
     });
 };
 
@@ -31,6 +32,7 @@ Downloader.prototype.setFileMorePriority = function(file) {
 };
 
 Downloader.prototype.setFileBuffer = function(file) {
+  // esto es una variable global? - JJ
     stream  = this.client.files[file].getBuffer();
     //poner a reproducir el buffer
 };
@@ -40,16 +42,23 @@ Downloader.prototype.setPlayFile = function(file) {
 };
 
 Downloader.prototype.getFiles = function(){
-    var files_ = [];
-    var torrent_files = this.client.torrents;
-
-    // TODO: esas dos funciones anidadas son raras.
-    torrent_files.forEach( function(file_){
-	file_.files.forEach( function(f){
-	files_.push(f);
-	})
+  var files_ = [];
+  var torrent_files = this.client.torrents;
+  
+  // TODO: esas dos funciones anidadas son raras.
+  torrent_files.forEach( function(file_){
+    file_.files.forEach( function(f){
+      files_.push(f);
     })
-
-    return files_;
+  })
+  
+  return files_;
 }
+
+// TODO: Buscar nombre mejor para la variable i
+
+Downloader.prototype.getFileToPlay = function(i){
+    return this.client.torrents[0].files[i];
+}
+
 module.exports = Downloader;

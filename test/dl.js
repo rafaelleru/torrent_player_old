@@ -15,5 +15,6 @@ describe( "Crea un objeto y añade torrent", function() {
     should.equal( dl._torrentsArray.length, 1);
     done()
   })
+
 });
 

@@ -34,6 +34,10 @@
       
       <h3>drag here</h3>
     </div>
-    <script src="drag-drop.js"></script>
+    <script>
+      ipcRenderer.on('toPlay', (event, file) => {
+          updater.playFile(file);
+      }
+
   </body>
 </html>
