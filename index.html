@@ -15,7 +15,9 @@
 	var instance = new Updater();
 	var ipc = require('electron').ipcRenderer;
 	ipc.on('updatePlayList', function(event, data){
+	console.log('he recibido el mensaje "updatePlayList"');
 	instance.reloadList(data);
+	console.log('he recargado el html');
 	})
       </script>
     </ol>
