@@ -8,12 +8,14 @@ function Updater(){
 };
 
 Updater.prototype.reloadList = function(files){
-    for(var i=0; i < files.length; i++){
+    //console.log('actualizo el html con los archivos del torrent');
+    for(var i=0; i < files.length; i++){ 
 	//console.log(i);
         var list_element = document.createElement('li');
         list_element.setAttribute('id', 'item_'+ i.toString());
 
         if(files[i].name.includes('mp3',files[i].name.length - 4)){
+	    console.log(files[i].name);
             list_element.innerHTML=files[i].name;
             this.list_div.appendChild(list_element);
         }
