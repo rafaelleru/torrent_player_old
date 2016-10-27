@@ -19,6 +19,7 @@ Downloader.prototype.addTorrent = function(torrent){
     this._torrentsArray.push(torrent);
     this.client.add(torrent, function(torrent){
 	console.log(torrent.infoHash);
+	console.log(torrent.files.length);
     }); // esto debería ser lo mismo que lo de abajo
 
 
@@ -52,8 +53,10 @@ Downloader.prototype.getFiles = function(){
 }
 
 Downloader.prototype.getLastFiles = function(){
-    var torrent = this.client.torrents[this.client.torrents.length -1];
-    //console.log(torrent.infoHash);
-    console.log(torrent.files.length);
+    this.client.torrents.forEach( function (f) {
+	console.log("lastFiles");
+	console.log(f.infoHash);
+	console.log(f.files.length);
+    })
 }
 module.exports = Downloader;

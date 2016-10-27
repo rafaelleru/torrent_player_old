@@ -65,12 +65,15 @@ var downloaderInstance = new Downloader();
 var updater = require("./mainWindowUpdater.js");
 
 ipc.on('addTorrent', function(event, data){
-    data.forEach((file) => downloaderInstance.addTorrent(file));
+    data.forEach( function(file){
+	downloaderInstance.addTorrent(file, function(){
+	    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());});
+    })
+});
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
-    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());
+    
     // actualizar el prototipo no suele serlo... 
-})
 
 ipc.on('playRequest', function(event, data){
     console.log('se ha solicitado reproducir ' + data.toString() + ' que es de tipo: ' + data.typeof);
