@@ -59,17 +59,16 @@ app.on('activate', function() {
 var ipc = require('electron').ipcMain;
 
 const Downloader = require("./downloader.js");
-var Updater = require("./mainWindowUpdater.js");
 
 var downloaderInstance = new Downloader();
-var updater = require("./mainWindowUpdater.js");
 
 ipc.on('addTorrent', function(event, data){
     data.forEach((file) => downloaderInstance.addTorrent(file));
+    event.sender.send('updatePlayList', downloaderInstance.getFiles());
+
     // TODO: No se si esto va aqui
     // TODO: ni si es la mejor forma de obtener los archivos.
     //console.log('actualizo el HTML');
-    event.sender.send('updatePlayList', downloaderInstance.getFiles());
     // actualizar el prototipo no suele serlo... 
 })
 
@@ -77,3 +76,4 @@ ipc.on('playRequest', function(event, data){
     console.log('se ha solicitado reproducir ' + data.toString());
     event.sender.send('toPlay', downloaderInstance.getFileToPlay(data));
 })
+ 
