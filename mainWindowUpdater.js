@@ -30,8 +30,8 @@ Updater.prototype.reloadList = function(files){
 function requestPlay(i){
     ipcRenderer.send('playRequest', i);
     ipcRenderer.on('toPlay', (event, file) => {
-	console.log('voy a intentar reproducir a ver que pasa');
-	console.log(file.typeof);
+//	console.log('voy a intentar reproducir a ver que pasa');
+//	console.log(file.typeof);
 	file.appendTo('body');
     })
 }
