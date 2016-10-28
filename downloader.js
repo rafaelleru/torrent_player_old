@@ -15,14 +15,13 @@ Downloader.prototype.startDownload = function(torrent) {
     });
 };
 
-Downloader.prototype.addTorrent = function(torrent){
+Downloader.prototype.addTorrent = function(torrent, callback){
     this._torrentsArray.push(torrent);
     this.client.add(torrent, function(torrent){
 	console.log(torrent.infoHash);
 	console.log(torrent.files.length);
     }); // esto debería ser lo mismo que lo de abajo
-
-
+    callback();
 };
 
 Downloader.prototype.setFileMorePriority = function(file) {

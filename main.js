@@ -46,7 +46,7 @@ app.on('window-all-closed', function() {
 
 app.on('activate', function() {
     // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
+nnnn    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow()
     }
@@ -67,13 +67,11 @@ var updater = require("./mainWindowUpdater.js");
 ipc.on('addTorrent', function(event, data){
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
-	    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());});
-    })
+	    console.log("despues de añadir el torrent")
+	})
+    });
 });
-    // TODO: No se si esto va aqui
-    // TODO: ni si es la mejor forma de obtener los archivos.
-    
-    // actualizar el prototipo no suele serlo... 
+
 
 ipc.on('playRequest', function(event, data){
     console.log('se ha solicitado reproducir ' + data.toString() + ' que es de tipo: ' + data.typeof);
