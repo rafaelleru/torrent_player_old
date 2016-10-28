@@ -7,16 +7,14 @@
 
   </head>
   <body id="body">
-    <script>
-      var Updater = require('./mainWindowUpdater');
-      var instance = new Updater();
-      var ipc = require('electron').ipcRenderer;
-      ipc.on('updatePlayList', function(event, data){
-      console.log('he recibido el mensaje "updatePlayList"');
-      instance.reloadList(data);
-      console.log('he recargado el html');
-      })
-    </script>
+      <script>
+	var Updater = require("./mainWindowUpdater.js");
+	var instance = new Updater();
+
+	ipcRenderer.on('updatePlayList', (event, files) => {
+	instance.reloadList(files);
+	})
+      </script>
 
     <h1>Reproductor de musica</h1>
     <ol id=songs_queue>
