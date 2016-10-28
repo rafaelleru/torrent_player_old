@@ -46,7 +46,7 @@ app.on('window-all-closed', function() {
 
 app.on('activate', function() {
     // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
+nnnn    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow()
     }
@@ -63,6 +63,7 @@ const Downloader = require("./downloader.js");
 var downloaderInstance = new Downloader();
 
 ipc.on('addTorrent', function(event, data){
+<<<<<<< HEAD
     data.forEach((file) => downloaderInstance.addTorrent(file));
     files = [];
     files = downloaderInstance.getFiles();
@@ -73,6 +74,15 @@ ipc.on('addTorrent', function(event, data){
     console.log('actualizo el HTML');
     // actualizar el prototipo no suele serlo... 
 })
+=======
+    data.forEach( function(file){
+	downloaderInstance.addTorrent(file, function(){
+	    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());
+	})
+    });
+});
+
+>>>>>>> rafa_development
 
 ipc.on('playRequest', function(event, data){
     console.log('se ha solicitado reproducir ' + data.toString());

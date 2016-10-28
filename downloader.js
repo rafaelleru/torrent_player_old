@@ -17,8 +17,9 @@ Downloader.prototype.startDownload = function(torrent) {
     });
 };
 
-Downloader.prototype.addTorrent = function(torrent){
+Downloader.prototype.addTorrent = function(torrent, callback){
     this._torrentsArray.push(torrent);
+<<<<<<< HEAD
     this.client.add(torrent); // esto debería ser lo mismo que lo de abajo
     console.log(this.client.torrents.length);
     // if(this._torrentsArray.length != 0){
@@ -26,6 +27,13 @@ Downloader.prototype.addTorrent = function(torrent){
     // 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
     // };
 
+=======
+    this.client.add(torrent, function(torrent){
+	console.log(torrent.infoHash);
+	console.log(torrent.files.length);
+	 callback();
+    }); // esto debería ser lo mismo que lo de abajo
+>>>>>>> rafa_development
 };
 
 Downloader.prototype.setFileMorePriority = function(file) {
@@ -56,13 +64,14 @@ Downloader.prototype.getFiles = function(){
   return files_;
 }
 
-// TODO: No va ninguna de las dos
+Downloader.prototype.getLastFiles = function(){
+    this.client.torrents.forEach( function (f) {
+	console.log("lastFiles");
+	console.log(f.infoHash);
+	console.log(f.files.length);
+    })
 
-Downloader.prototype.getFileToPlay = function(i){
-    torr = this.client.torrents;
-   }
-
-Downloader.prototype.getLastFiles = function(){}
-
+    return this.client.torrents[this.client.torrents.length -1].files;
+}
 
 module.exports = Downloader;

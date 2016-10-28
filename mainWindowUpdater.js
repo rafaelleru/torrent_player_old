@@ -7,17 +7,8 @@ function Updater(){
 };
 
 Updater.prototype.reloadList = function(files){
-    //console.log('actualizo el html con los archivos del torrent');
-    console.log(files.length);
-
-    files.forEach(function(f){
-	console.log(f.name);
-    })
-    this.list_div = document.getElementById('songs_queue');
-
     for(var i=0; i < files.length; i++){ 
 	//console.log(i);
-
 	console.log(files[i].name);
 	var list_element = document.createElement('li');
         list_element.setAttribute('id', 'item_'+ i.toString());
