@@ -60,4 +60,12 @@ Downloader.prototype.getLastFiles = function(){
     return this.client.torrents[this.client.torrents.length -1].files;
 }
 
+Downloader.prototype.getNumberOfTorrents = function(){
+    return this.client.torrents.length;
+}
+
+Downloader.prototype.getFileToPlay = function(file, torrent){
+    return this.client.torrents[torrent].files[file];
+}
+
 module.exports = Downloader;

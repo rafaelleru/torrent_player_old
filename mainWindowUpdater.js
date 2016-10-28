@@ -19,9 +19,8 @@ Updater.prototype.reloadList = function(files, n_torrent){
             this.list_div.appendChild(list_element);
         //}
 
-	var list_element = document.createElement('li');
-	list_element.setAttribute('id', 'item_'+ i.toString());
 	(function (i){
+	    console.log("asigno onclick");
 	    list_element.onclick = function(){
 		requestPlay(i, n_torrent-1);
 	    };
@@ -32,13 +31,8 @@ Updater.prototype.reloadList = function(files, n_torrent){
 // TODO: voy a poner el click listener aqui, pero hay que pensar mejor donde ponerlo
 
 function requestPlay(i, n_torrent){
+    console.log("requestPlay " + i.toString());
     ipcRenderer.send('playRequest', [i, n_torrent]);
-    ipcRenderer.on('toPlay', (event, file) => {
-//	console.log('voy a intentar reproducir a ver que pasa');
-//	console.log(file.typeof);
-	file.appendTo('body');
-    })
 }
-    
 
 module.exports = Updater;
