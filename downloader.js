@@ -20,8 +20,8 @@ Downloader.prototype.addTorrent = function(torrent, callback){
     this.client.add(torrent, function(torrent){
 	console.log(torrent.infoHash);
 	console.log(torrent.files.length);
+	 callback();
     }); // esto debería ser lo mismo que lo de abajo
-    callback();
 };
 
 Downloader.prototype.setFileMorePriority = function(file) {
@@ -57,5 +57,7 @@ Downloader.prototype.getLastFiles = function(){
 	console.log(f.infoHash);
 	console.log(f.files.length);
     })
+
+    return this.client.torrents[this.client.torrents.length -1].files;
 }
 module.exports = Downloader;
