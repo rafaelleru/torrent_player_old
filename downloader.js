@@ -19,21 +19,11 @@ Downloader.prototype.startDownload = function(torrent) {
 
 Downloader.prototype.addTorrent = function(torrent, callback){
     this._torrentsArray.push(torrent);
-<<<<<<< HEAD
-    this.client.add(torrent); // esto debería ser lo mismo que lo de abajo
-    console.log(this.client.torrents.length);
-    // if(this._torrentsArray.length != 0){
-    // 	console.log("algoo");	
-    // 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
-    // };
-
-=======
     this.client.add(torrent, function(torrent){
 	console.log(torrent.infoHash);
 	console.log(torrent.files.length);
 	 callback();
     }); // esto debería ser lo mismo que lo de abajo
->>>>>>> rafa_development
 };
 
 Downloader.prototype.setFileMorePriority = function(file) {
