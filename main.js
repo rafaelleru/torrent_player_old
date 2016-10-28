@@ -63,18 +63,6 @@ const Downloader = require("./downloader.js");
 var downloaderInstance = new Downloader();
 
 ipc.on('addTorrent', function(event, data){
-<<<<<<< HEAD
-    data.forEach((file) => downloaderInstance.addTorrent(file));
-    files = [];
-    files = downloaderInstance.getFiles();
-    event.sender.send('updatePlayList', files);
-
-    // TODO: No se si esto va aqui
-    // TODO: ni si es la mejor forma de obtener los archivos.
-    console.log('actualizo el HTML');
-    // actualizar el prototipo no suele serlo... 
-})
-=======
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
 	    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());
@@ -82,7 +70,6 @@ ipc.on('addTorrent', function(event, data){
     });
 });
 
->>>>>>> rafa_development
 
 ipc.on('playRequest', function(event, data){
     console.log('se ha solicitado reproducir ' + data.toString());
