@@ -36,10 +36,6 @@ Downloader.prototype.setFileBuffer = function(file) {
     //poner a reproducir el buffer
 };
 
-Downloader.prototype.setPlayFile = function(file) {
-    document.getElementById("body").append(this.client.files[file]);
-};
-
 Downloader.prototype.getFiles = function(){
   var files_ = [];
   var torrent_files = this.client.torrents;
