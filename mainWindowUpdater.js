@@ -35,4 +35,7 @@ function requestPlay(i, n_torrent){
     ipcRenderer.send('playRequest', [i, n_torrent]);
 }
 
+Updater.prototype.play = function(file){
+    file.appendTo('body');
+}
 module.exports = Updater;

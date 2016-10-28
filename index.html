@@ -17,6 +17,11 @@
 	ipcRenderer.on('updatePlayList', (event, data) => {
 	instance.reloadList(data[0], data[1]);
 	})
+
+	ipcRenderer.on('toPlay', (event, file) => {
+	console.log(file);
+	instance.play(file);
+	})
       </script>
       <!-- aqui tiene que ir el updater-->
       <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
