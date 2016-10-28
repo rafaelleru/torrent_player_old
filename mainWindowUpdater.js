@@ -7,12 +7,12 @@ function Updater(){
     this.list_div = document.getElementById('songs_queue');
 };
 
-Updater.prototype.reloadList = function(files){
+Updater.prototype.reloadList = function(files, n_torrent){
     for(var i=0; i < files.length; i++){
 
         console.log(i);
         var list_element = document.createElement('li');
-        list_element.setAttribute('id', 'item_'+ i.toString());
+        list_element.setAttribute('id', 'item_'+ i.toString() + '_' + n_torrent.toString());
 
         //if(files[i].name.includes('mp3',files[i].name.length - 4)){
             list_element.innerHTML=files[i].name;
@@ -21,15 +21,19 @@ Updater.prototype.reloadList = function(files){
 
 	var list_element = document.createElement('li');
 	list_element.setAttribute('id', 'item_'+ i.toString());
-	list_element.onclick = requestPlay(i);
+	(function (i){
+	    list_element.onclick = function(){
+		requestPlay(i, n_torrent);
+	    };
+	})(i);
 
     }
 };
 // TODO: voy a poner el click listener aqui, pero hay que pensar mejor donde ponerlo
 
-function requestPlay(i){
+function requestPlay(i, n_torrent){
     ipcRenderer.send('playRequest', i);
-    ipcRenderer.on('toPlay', (event, file) => {
+    ipcRenderer.on('toPlay', (event, file, n_torrent) => {
 //	console.log('voy a intentar reproducir a ver que pasa');
 //	console.log(file.typeof);
 	file.appendTo('body');
