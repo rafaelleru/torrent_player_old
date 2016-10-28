@@ -67,7 +67,7 @@ var updater = require("./mainWindowUpdater.js");
 ipc.on('addTorrent', function(event, data){
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
-	    console.log("despues de añadir el torrent")
+	    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());
 	})
     });
 });
