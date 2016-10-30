@@ -19,8 +19,8 @@
 	})
 
 	ipcRenderer.on('toPlay', (event, file) => {
-	console.log(file);
-	instance.play(file);
+	console.log('toPlay: ' + file.name);
+	//file.appendTo('body');
 	})
       </script>
       <!-- aqui tiene que ir el updater-->
