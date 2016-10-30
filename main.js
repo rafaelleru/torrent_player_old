@@ -19,7 +19,7 @@ function createWindow() {
     mainWindow.loadURL(`file://${__dirname}/index.html`)
 
     // Open the DevTools.
-    //mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
@@ -46,7 +46,7 @@ app.on('window-all-closed', function() {
 
 app.on('activate', function() {
     // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
+nnnn    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow()
     }
@@ -59,22 +59,21 @@ app.on('activate', function() {
 var ipc = require('electron').ipcMain;
 
 const Downloader = require("./downloader.js");
-var Updater = require("./mainWindowUpdater.js");
 
 var downloaderInstance = new Downloader();
-var updater = require("./mainWindowUpdater.js");
 
 ipc.on('addTorrent', function(event, data){
-  console.log(data);
-    data.forEach((file) => downloaderInstance.addTorrent(file));
-    // TODO: No se si esto va aqui
-    // TODO: ni si es la mejor forma de obtener los archivos.
-    //console.log('actualizo el HTML');
-    event.sender.send('updatePlayList', downloaderInstance.getFiles());
-    // actualizar el prototipo no suele serlo...
-})
+
+    data.forEach( function(file){
+	downloaderInstance.addTorrent(file, function(){
+	    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());
+	})
+    });
+});
 
 ipc.on('playRequest', function(event, data){
     console.log('se ha solicitado reproducir ' + data.toString());
-    event.sender.send('toPlay', downloaderInstance.getFileToPlay(data));
+    console.log(data);
+    //console.log(downloaderInstance.getFileToPlay(data).typeof);
+    //event.sender.send('toPlay', downloaderInstance.getFileToPlay(data));
 })

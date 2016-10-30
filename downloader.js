@@ -7,6 +7,7 @@ function Downloader(){
 //    console.log('Holaaaa');
     this._torrentsArray = [];
     this.client = new WebTorrent();
+    this.tID;
 };
 
 
@@ -16,16 +17,13 @@ Downloader.prototype.startDownload = function(torrent) {
     });
 };
 
-Downloader.prototype.addTorrent = function(torrent){
-
+Downloader.prototype.addTorrent = function(torrent, callback){
     this._torrentsArray.push(torrent);
-    this.client.add(torrent); // esto debería ser lo mismo que lo de abajo
-//    console.log("Añadido");
-    // if(this._torrentsArray.length != 0){
-    // 	console.log("algoo");
-    // 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
-    // };
-
+    this.client.add(torrent, function(torrent){
+	console.log(torrent.infoHash);
+	console.log(torrent.files.length);
+	 callback();
+    }); // esto debería ser lo mismo que lo de abajo
 };
 Downloader.prototype.setFileMorePriority = function(file) {
     this.client.files[file].select();
@@ -55,10 +53,14 @@ Downloader.prototype.getFiles = function(){
   return files_;
 }
 
-// TODO: Buscar nombre mejor para la variable i
+Downloader.prototype.getLastFiles = function(){
+    this.client.torrents.forEach( function (f) {
+	console.log("lastFiles");
+	console.log(f.infoHash);
+	console.log(f.files.length);
+    })
 
-Downloader.prototype.getFileToPlay = function(i){
-    return this.client.torrents[0].files[i];
+    return this.client.torrents[this.client.torrents.length -1].files;
 }
 
 module.exports = Downloader;
