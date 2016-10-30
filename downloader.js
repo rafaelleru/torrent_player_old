@@ -17,16 +17,16 @@ Downloader.prototype.startDownload = function(torrent) {
 };
 
 Downloader.prototype.addTorrent = function(torrent){
+
     this._torrentsArray.push(torrent);
     this.client.add(torrent); // esto debería ser lo mismo que lo de abajo
 //    console.log("Añadido");
     // if(this._torrentsArray.length != 0){
-    // 	console.log("algoo");	
+    // 	console.log("algoo");
     // 	this.client.add(this._torrentsArray[this._torrentsArray.length]);
     // };
 
 };
-
 Downloader.prototype.setFileMorePriority = function(file) {
     this.client.files[file].select();
 };
@@ -44,14 +44,14 @@ Downloader.prototype.setPlayFile = function(file) {
 Downloader.prototype.getFiles = function(){
   var files_ = [];
   var torrent_files = this.client.torrents;
-  
+
   // TODO: esas dos funciones anidadas son raras.
   torrent_files.forEach( function(file_){
     file_.files.forEach( function(f){
       files_.push(f);
     })
   })
-  
+
   return files_;
 }
 

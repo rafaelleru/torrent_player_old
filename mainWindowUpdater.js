@@ -8,9 +8,9 @@ function Updater(){
 };
 
 Updater.prototype.reloadList = function(files){
-    //console.log('actualizo el html con los archivos del torrent');
+    console.log('actualizo el html con los archivos del torrent');
     for(var i=0; i < files.length; i++){
-	//console.log(i);
+	     console.log(i);
         var list_element = document.createElement('li');
         list_element.setAttribute('id', 'item_'+ i.toString());
 

@@ -12,13 +12,12 @@
       <!-- aqui tiene que ir el updater-->
       <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
       <script>
-	var Updater = require('./mainWindowUpdater');
-	var instance = new Updater();
-	var ipc = require('electron').ipcRenderer;
-	ipc.on('updatePlayList', function(event, data){
-	instance.reloadList(data);
-	})
-
+	      var Updater = require('./mainWindowUpdater');
+	      var instance = new Updater();
+	      var ipc = require('electron').ipcRenderer;
+	      ipc.on('updatePlayList', function(event, data){
+	          instance.reloadList(data);
+	      })
       </script>
     </ol>
     <div id="progress">
@@ -29,7 +28,7 @@
 
     </div>
     <div id="draganddrop">
-
+      <script src="drag-drop.js"></script>
       <h3>drag here</h3>
     </div>
   </body>
