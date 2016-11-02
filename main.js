@@ -72,10 +72,9 @@ ipc.on('addTorrent', function(event, data){
 
 
 ipc.on('playRequest', function(event, data){
-    //    console.log('se ha solicitado reproducir el elemento' + data[0].toString() + 'del torrent numero: ' + data[1].toString());
-    console.log("play request:");
-    console.log("play: " + downloaderInstance.getFileToPlay(data[0], data[1]).name);
-    file =  downloaderInstance.getFileToPlay(data[0], data[1]);
+    file = downloaderInstance.getFileToPlay(data[0], data[1]);
     event.sender.send('toPlay', file);
 })
- 
+
+
+

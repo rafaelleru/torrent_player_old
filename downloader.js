@@ -1,3 +1,4 @@
+
 //clase method
 //author @rafaelleru
 
@@ -22,7 +23,7 @@ Downloader.prototype.addTorrent = function(torrent, callback){
     this.client.add(torrent, function(torrent){
 	console.log(torrent.infoHash);
 	console.log(torrent.files.length);
-	 callback();
+	callback();
     }); // esto debería ser lo mismo que lo de abajo
 };
 
@@ -65,6 +66,8 @@ Downloader.prototype.getNumberOfTorrents = function(){
 }
 
 Downloader.prototype.getFileToPlay = function(file, torrent){
+    //console.log(this.client.torrents[torrent].files[file]);
+    console.log(this.client.torrents[torrent].progress);
     return this.client.torrents[torrent].files[file];
 }
 

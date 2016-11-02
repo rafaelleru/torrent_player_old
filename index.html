@@ -18,9 +18,11 @@
 	instance.reloadList(data[0], data[1]);
 	})
 
-	ipcRenderer.on('toPlay', (event, file) => {
-	console.log('toPlay: ' + file.name);
-	//file.appendTo('body');
+	ipcRenderer.on('toPlay', (event, data) => {
+	/*console.log(typeof(data));
+	console.log(data.name);
+	console.log(data);*/
+	data.appendTo('body');
 	})
       </script>
       <!-- aqui tiene que ir el updater-->

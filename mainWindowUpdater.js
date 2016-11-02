@@ -36,6 +36,9 @@ function requestPlay(i, n_torrent){
 }
 
 Updater.prototype.play = function(file){
+    console.log('play method');
+    console.log(file.name);
+    console.log(file);
     file.appendTo('body');
 }
 module.exports = Updater;
