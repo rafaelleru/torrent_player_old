@@ -33,6 +33,16 @@ Updater.prototype.reloadList = function(files, n_torrent){
 function requestPlay(i, n_torrent){
     console.log("requestPlay " + i.toString());
     ipcRenderer.send('playRequest', [i, n_torrent]);
+
+    //Refrescar el progreso del torrent 
+    setTimeout(function(){
+	ipcRenderer.send('getProgress', n_torrent);
+	ipc.on('updateProgress', (event, data) => {
+	    var progressBar = document.getElementById('progress-bar');
+	    progress = data*100;
+	    progresBar.style.width = progress + '%';
+	})
+    }, 1000);
 }
 
 Updater.prototype.play = function(file){
@@ -41,4 +51,8 @@ Updater.prototype.play = function(file){
     console.log(file);
     file.appendTo('body');
 }
+
+
 module.exports = Updater;
+
+
