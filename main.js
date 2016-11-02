@@ -65,16 +65,16 @@ var downloaderInstance = new Downloader();
 ipc.on('addTorrent', function(event, data){
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
-	    event.sender.send('updatePlayList', downloaderInstance.getLastFiles());
+	    event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents() ]);
 	})
     });
 });
 
 
 ipc.on('playRequest', function(event, data){
-    console.log('se ha solicitado reproducir ' + data.toString());
-    console.log(data);
-    //console.log(downloaderInstance.getFileToPlay(data).typeof);
-    //event.sender.send('toPlay', downloaderInstance.getFileToPlay(data));
+    file = downloaderInstance.getFileToPlay(data[0], data[1]);
+    event.sender.send('toPlay', file);
 })
- 
+
+
+
