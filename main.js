@@ -72,8 +72,15 @@ ipc.on('addTorrent', function(event, data){
 
 
 ipc.on('playRequest', function(event, data){
+    console.log('play request'+ data[0].toString() + 'from torrent' + data[1].toString());
     file = downloaderInstance.getFileToPlay(data[0], data[1]);
     event.sender.send('toPlay', file);
+})
+
+ipc.on('getProgress', (event, data) => {
+    console.log(downloaderInstance.getProgress(data));
+    event.sender.send('progress' ,downloaderInstance.getProgress(data))
+    console.log("He enviado el progreso");
 })
 
 

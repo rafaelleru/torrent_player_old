@@ -20,7 +20,6 @@ Updater.prototype.reloadList = function(files, n_torrent){
         //}
 
 	(function (i){
-	    console.log("asigno onclick");
 	    list_element.onclick = function(){
 		requestPlay(i, n_torrent-1);
 	    };
@@ -28,27 +27,21 @@ Updater.prototype.reloadList = function(files, n_torrent){
 
     }
 };
+
+Updater.prototype.updateProgress = function(n_torrent){
+     //Refrescar el progreso del torrent 
+
+};
 // TODO: voy a poner el click listener aqui, pero hay que pensar mejor donde ponerlo
 
 function requestPlay(i, n_torrent){
-    console.log("requestPlay " + i.toString());
     ipcRenderer.send('playRequest', [i, n_torrent]);
-
-    //Refrescar el progreso del torrent 
     setTimeout(function(){
-	ipcRenderer.send('getProgress', n_torrent);
-	ipc.on('updateProgress', (event, data) => {
-	    var progressBar = document.getElementById('progress-bar');
-	    progress = data*100;
-	    progresBar.style.width = progress + '%';
-	})
     }, 1000);
+
 }
 
-Updater.prototype.play = function(file){
-    console.log('play method');
-    console.log(file.name);
-    console.log(file);
+Updater.prototype.play = function (file){
     file.appendTo('body');
 }
 
