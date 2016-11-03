@@ -66,10 +66,10 @@ Downloader.prototype.getNumberOfTorrents = function(){
 }
 
 Downloader.prototype.getFileToPlay = function(file, torrent){
-    //console.log(this.client.torrents[torrent].files[file]);
-    console.log(this.client.torrents[torrent].files[file]);
-    return this.client.torrents[torrent].files[file];
-    this.client.torrents[torrent].files[file].appendTo('body');
+/*    return this.client.torrents[torrent].files[file];
+      this.client.torrents[torrent].files[file].appendTo('body');*/
+
+    return this.client.torrents[torrent].files[file].createReadStream();
 }
 
 Downloader.prototype.getProgress = function(n_torrent){
