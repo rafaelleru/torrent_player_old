@@ -44,7 +44,7 @@ function requestPlay(i, n_torrent){
 Updater.prototype.play = function (file){
     console.log(file);
     var stream  = file;
-    stream.data();
+    console.log(stream.data());
 }
 
 
