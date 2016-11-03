@@ -42,7 +42,9 @@ function requestPlay(i, n_torrent){
 }
 
 Updater.prototype.play = function (file){
-    file.appendTo('body');
+    console.log(file);
+    var stream  = file;
+    stream.data();
 }
 
 
