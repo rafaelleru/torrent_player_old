@@ -1,3 +1,4 @@
+
 //clase method
 //author @rafaelleru
 
@@ -22,7 +23,7 @@ Downloader.prototype.addTorrent = function(torrent, callback){
     this.client.add(torrent, function(torrent){
 	console.log(torrent.infoHash);
 	console.log(torrent.files.length);
-	 callback();
+	callback();
     }); // esto debería ser lo mismo que lo de abajo
 };
 
@@ -34,10 +35,6 @@ Downloader.prototype.setFileBuffer = function(file) {
   // esto es una variable global? - JJ
     stream  = this.client.files[file].getBuffer();
     //poner a reproducir el buffer
-};
-
-Downloader.prototype.setPlayFile = function(file) {
-    document.getElementById("body").append(this.client.files[file]);
 };
 
 Downloader.prototype.getFiles = function(){
@@ -64,4 +61,21 @@ Downloader.prototype.getLastFiles = function(){
     return this.client.torrents[this.client.torrents.length -1].files;
 }
 
+Downloader.prototype.getNumberOfTorrents = function(){
+    return this.client.torrents.length;
+}
+
+Downloader.prototype.getFileToPlay = function(file, torrent){
+/*    return this.client.torrents[torrent].files[file];
+      this.client.torrents[torrent].files[file].appendTo('body');*/
+    return this.client.torrents[torrent].files[file];
+}
+
+Downloader.prototype.getProgress = function(n_torrent){
+    return this.client.torrents[n_torrent].progress;
+}
+
+Downloader.prototype.getTorrentHash = function(n_torrent){
+    return this.client.torrents[n_torrent].infoHash;
+}
 module.exports = Downloader;
