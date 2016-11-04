@@ -65,20 +65,26 @@ Downloader.prototype.getNumberOfTorrents = function(){
 }
 
 Downloader.prototype.getProgress = function(){
-    var progress = [];
+    var torrentProgress = [];
     this.client.torrents.forEach( function(c){
-	        progress.push(c.progress*100);
+	        torrentProgress.push(c.progress*100);
            console.log(c.progress);
        });
 
-    return progress;
+    return torrentProgress;
 }
 Downloader.prototype.getFileToPlay = function(file, torrent){
-    //console.log(this.client.torrents[torrent].files[file]);
-    var progress = this.client.torrents[torrent].progress;
-    console.log(progress);
+/*    return this.client.torrents[torrent].files[file];
+      this.client.torrents[torrent].files[file].appendTo('body');*/
     return this.client.torrents[torrent].files[file];
 }
 
+Downloader.prototype.getProgress2 = function(n_torrent){
+    return this.client.torrents[n_torrent].progress;
+}
+
+Downloader.prototype.getTorrentHash = function(n_torrent){
+    return this.client.torrents[n_torrent].infoHash;
+}
 
 module.exports = Downloader;

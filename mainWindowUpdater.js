@@ -16,13 +16,12 @@ Updater.prototype.reloadList = function(files, n_torrent){
         var list_element = document.createElement('li');
         list_element.setAttribute('id', 'item_'+ i.toString() + '_' + n_torrent.toString());
 
-        //if(files[i].name.includes('mp3',files[i].name.length - 4)){
+        if(files[i].name.includes('mp3',files[i].name.length - 4)){
             list_element.innerHTML=files[i].name;
             this.list_div.appendChild(list_element);
-        //}
+        }
 
 	(function (i){
-	    console.log("asigno onclick");
 	    list_element.onclick = function(){
 		requestPlay(i, n_torrent-1);
 	    };
@@ -30,18 +29,27 @@ Updater.prototype.reloadList = function(files, n_torrent){
 
     }
 };
+
+Updater.prototype.updateProgress = function(n_torrent){
+     //Refrescar el progreso del torrent
+     document.getElementById('progress-bar').style.width = n_torrent+"%";
+
+};
 // TODO: voy a poner el click listener aqui, pero hay que pensar mejor donde ponerlo
 
 function requestPlay(i, n_torrent){
-    console.log("requestPlay " + i.toString());
     ipcRenderer.send('playRequest', [i, n_torrent]);
-}
-    
+    setTimeout(function(){
+    }, 1000);
 
-Updater.prototype.play = function(file){
-    console.log('play method');
-    console.log(file.name);
-    console.log(file);
-    file.appendTo('body');
 }
+
+
+Updater.prototype.play = function (file){
+    console.log(file);
+    var stream  = file;
+    console.log(stream.data());
+}
+
+
 module.exports = Updater;

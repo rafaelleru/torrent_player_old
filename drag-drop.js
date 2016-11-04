@@ -1,6 +1,9 @@
 var dragDrop = require('drag-drop/buffer')
-var ipc = require('electron').ipcRenderer;
+var ipc1 = require('electron').ipcRenderer;
 
-dragDrop("#draganddrop", function(files){
-    ipc.send('addTorrent', files);
+
+dragDrop(document.getElementById("draganddrop"), function(files){
+    console.log('torrent añadido');
+    ipc1.send('addTorrent', files);
+
 })
