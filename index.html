@@ -4,27 +4,42 @@
     <meta charset="UTF-8">
     <title>Reproductor de musica</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+
   </head>
-  <body id="body">
-    <h1>Reproductor de musica</h1>
-    <div id="progress">
-      <div class="progress">
-        <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+  <body>
+    <div class="container-fluid">  <!-- Top bar -->
+      <div class="row">
+        <h1>TORRENT PLAYER</h1>
+      </div>
+      <div id="progress">
+        <div class="progress">
+          <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
+      </div>
     </div>
-    <ol id=songs_queue>
-      <script src='./mainrenderer.js'></script>
-      <!-- aqui tiene que ir el updater-->
-      <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
-    </ol>
 
+    <div class="row">
+      <div class="col-md-6">
+        <ol id=songs_queue>
+          <script src='./mainrenderer.js'></script>
+          <!-- aqui tiene que ir el updater-->
+          <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
+        </ol>
+        <audio id=audio controls=true></audio>
+      </div>
+      <div class="col-md-3">
+      <!-- Imagen del disco si hay -->
+      </div>
+      <div class="col-md-3">
+      <!-- Lo de las ips va aqui -->
+      </div>
 
     </div>
-    <audio id=audio controls=true></audio>
-
     <div id="draganddrop">
-      <script src="drag-drop.js"></script>
-      <h3>drag here</h3>
+          <script src="drag-drop.js"></script>
+          <h3>drag here</h3>
     </div>
   </body>
 </html>
