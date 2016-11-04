@@ -12,7 +12,7 @@
     <script src='./drag-drop.js'></script>
     <div class="container-fluid">  <!-- Top bar -->
       <div class="row">
-        <h1>TORRENT PLAYER</h1>
+        <h1>-Torrent Player-</h1>
       </div>
       <div id="progress">
         <div class="progress">
@@ -20,23 +20,30 @@
         </div>
       </div>
     </div>
+<div class="container row">
 
-    <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6 col-xs-6">
         <ol id=songs_queue>
           <script src='./mainrenderer.js'></script>
           <!-- aqui tiene que ir el updater-->
           <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
         </ol>
-        <audio id=audio controls=true></audio>
+
+        <audio id=audio controls=true class="ocultar"></audio>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-xs-3">
       <!-- Imagen del disco si hay -->
+        <div class="cuadrado">
+          <img src="" width="230px" height="230px">
+        </div>
       </div>
-      <div class="col-md-3">
+      <div class="col-md-3 col-xs-3">
       <!-- Lo de las ips va aqui -->
+        <div class="cuadrado">
+        </div>
+        <span id="DescargaTotal"></span>
       </div>
 
-    </div>
+  </div>
   </body>
 </html>
