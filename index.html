@@ -13,16 +13,20 @@
       <script>
 	var Updater = require("./mainWindowUpdater.js");
 	var instance = new Updater();
+  var progress = 0;
+
+
 
 	ipcRenderer.on('updatePlayList', (event, data) => {
-	instance.reloadList(data[0], data[1]);
+	  instance.reloadList(data[0], data[1]);
+    this.progress = data[2][0];
+    document.getElementById('progress-bar').style.width = progress+"%";
+	  console.log(data[2]);
+
 	})
 
-	ipcRenderer.on('toPlay', (event, data) => {
-	/*console.log(typeof(data));
-	console.log(data.name);
-	console.log(data);*/
-	data.appendTo('body');
+	ipcRenderer.on('toPlay', (event, file) => {
+
 	})
       </script>
       <!-- aqui tiene que ir el updater-->

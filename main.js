@@ -66,7 +66,7 @@ ipc.on('addTorrent', function(event, data){
 
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
-	    event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents() ]);
+	    event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents(), downloaderInstance.getProgress() ]);
 	})
     });
 });
@@ -74,10 +74,5 @@ ipc.on('addTorrent', function(event, data){
 ipc.on('playRequest', function(event, data){
     file = downloaderInstance.getFileToPlay(data[0], data[1]);
     event.sender.send('toPlay', file);
+    
 })
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> ad8f26520042ed926ec855339287e1b0e990c26e

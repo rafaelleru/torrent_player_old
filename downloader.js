@@ -64,10 +64,21 @@ Downloader.prototype.getNumberOfTorrents = function(){
     return this.client.torrents.length;
 }
 
+Downloader.prototype.getProgress = function(){
+    var progress = [];
+    this.client.torrents.forEach( function(c){
+	        progress.push(c.progress*100);
+           console.log(c.progress);
+       });
+
+    return progress;
+}
 Downloader.prototype.getFileToPlay = function(file, torrent){
     //console.log(this.client.torrents[torrent].files[file]);
-    console.log(this.client.torrents[torrent].progress);
+    var progress = this.client.torrents[torrent].progress;
+    console.log(progress);
     return this.client.torrents[torrent].files[file];
 }
+
 
 module.exports = Downloader;

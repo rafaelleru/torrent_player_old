@@ -7,17 +7,12 @@ function Updater(){
     this.list_div = document.getElementById('songs_queue');
 };
 
-<<<<<<< HEAD
-Updater.prototype.reloadList = function(files){
 
-    for(var i=0; i < files.length; i++){
-        console.log(i);
-=======
 Updater.prototype.reloadList = function(files, n_torrent){
     console.log(files.length.toString() + ' archivos del torrent: '+ n_torrent.toString());
 
     for(var i=0; i < files.length; i++){
->>>>>>> ad8f26520042ed926ec855339287e1b0e990c26e
+
         var list_element = document.createElement('li');
         list_element.setAttribute('id', 'item_'+ i.toString() + '_' + n_torrent.toString());
 
@@ -41,10 +36,7 @@ function requestPlay(i, n_torrent){
     console.log("requestPlay " + i.toString());
     ipcRenderer.send('playRequest', [i, n_torrent]);
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> ad8f26520042ed926ec855339287e1b0e990c26e
+    
 
 Updater.prototype.play = function(file){
     console.log('play method');
