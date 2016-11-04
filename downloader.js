@@ -76,6 +76,8 @@ Downloader.prototype.getProgress = function(){
 Downloader.prototype.getFileToPlay = function(file, torrent){
 /*    return this.client.torrents[torrent].files[file];
       this.client.torrents[torrent].files[file].appendTo('body');*/
+    this.client.torrents[torrent].files[file].select();
+    this.client.torrents[torrent].files[file+1].select();
     return this.client.torrents[torrent].files[file];
 }
 

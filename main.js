@@ -84,7 +84,7 @@ ipc.on('playRequest', function(event, data){
 
 ipc.on('getProgress', (event, data) => {
     console.log(downloaderInstance.getProgress(data));
-    event.sender.send('progress' ,downloaderInstance.getProgress(data))
+    event.sender.send('updateProgress' ,downloaderInstance.getProgress(data))
     console.log("He enviado el progreso");
 
 })
