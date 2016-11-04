@@ -4,13 +4,12 @@
     <meta charset="UTF-8">
     <title>Reproductor de musica</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    <script>window.$ = window.jQuery = require('jquery');</script> <!-- Necesitas haber hecho 'npm install jquery --save' -->
   </head>
   <body id="body">
     <h1>Reproductor de musica</h1>
     <ol id=songs_queue>
-      <script src='./mainrenderer.js'>
-      </script>
+      <script src='./mainrenderer.js'></script>
       <!-- aqui tiene que ir el updater-->
       <!-- updaterInstance.reloadList(downloaderInstance.getFiles()); -->
     </ol>
@@ -22,7 +21,7 @@
 
     </div>
     <audio id=audio controls=true></audio>
-      
+
     <div id="draganddrop">
       <script src="drag-drop.js"></script>
       <h3>drag here</h3>

@@ -13,7 +13,8 @@ function createWindow() {
     // Create the browser window.
     mainWindow = new BrowserWindow({
         width: 800,
-        height: 600
+        height: 600,
+        icon: `${__dirname}/icon.ico`
     })
 
     // and load the index.html of the app.
@@ -64,15 +65,16 @@ const Downloader = require("./downloader.js");
 var downloaderInstance = new Downloader();
 
 ipc.on('addTorrent', function(event, data){
+
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
-	    event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents() ]);
+	    event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents(), downloaderInstance.getProgress() ]);
 	})
     });
 });
 
-
 ipc.on('playRequest', function(event, data){
+
     console.log('play request'+ data[0].toString() + 'from torrent' + data[1].toString());
     file = downloaderInstance.getFileToPlay(data[0], data[1])
     torrent_hash = downloaderInstance.getTorrentHash(data[1]);
@@ -84,7 +86,5 @@ ipc.on('getProgress', (event, data) => {
     console.log(downloaderInstance.getProgress(data));
     event.sender.send('progress' ,downloaderInstance.getProgress(data))
     console.log("He enviado el progreso");
+
 })
-
-
-

@@ -5,6 +5,11 @@ var updater = new Updater();
 
 ipc.on('updatePlayList', (event, data) => {
     updater.reloadList(data[0], data[1]);
+
+    progressBar = document.getElementById('progress-bar');
+    progressBar.style.width = data[2][0]+"%";
+    console.log(data[2][0]);
+
 });
 
 ipc.on('toPlay', (event, data) => {
