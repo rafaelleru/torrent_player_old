@@ -18,8 +18,10 @@ ipc.on('toPlay', (event, data) => {
     audio.play();
 })
 
-ipc.on('updateProgress', (event, data) => {
+ipc.on('updateProgress', (event, data) => { 
     progressBar = document.getElementById('progress-bar');
     progressBar.style.width = data[2][0]+"%";
     console.log(data[2][0]);
+    audio = document.getElementById('audio');
+    audio.style.display = 'block';
 })
