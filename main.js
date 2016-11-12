@@ -77,9 +77,12 @@ ipc.on('getPlayData', function(event, data){
     console.log('get file data stream');
     in_play = data[1];
     var streamfile = downloaderInstance.getFileToPlay(data[0], data[1]).createReadStream();
+    event.sender.send('toPlay', [downloaderInstance.getFileToPlay(data[0], data[1]).name, downloaderInstance.getFileToPlay(data[0], data[1]).length]);
+
     streamfile.on('data', function(chunk){
 	event.sender.send('addData', chunk)});
-    event.sender.send('toPlay', downloaderInstance.getFileToPlay(data[0], data[1]).name);
+
+    
     /*torrent_hash = downloaderInstance.getTorrentHash(data[1]);
     event.sender.send('toPlay', [torrent_hash, file.path])*/
 })
