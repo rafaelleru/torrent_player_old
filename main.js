@@ -63,7 +63,7 @@ var ipc = require('electron').ipcMain;
 const Downloader = require("./downloader.js");
 
 var downloaderInstance = new Downloader();
-var in_play;
+var currentPlayingTorrent;
 
 ipc.on('addTorrent', function(event, data){
 
@@ -76,27 +76,12 @@ ipc.on('addTorrent', function(event, data){
 
 ipc.on('getPlayData', function(event, data){
     console.log('get file data stream');
-    in_play = data[1];
-
-    //Crea el stream del archivo que se va a reproducir
-    var streamfile = downloaderInstance.getFileToPlay(data[0], data[1]).createReadStream();
-
-    //se envia la longiud del archivo en bytes para el buffer.
-    event.sender.send('toPlay', [downloaderInstance.getFileToPlay(data[0], data[1]).name,
-				 downloaderInstance.getFileToPlay(data[0], data[1]).length]);
+    if(currentPlayingTorrent != data[1]){
+	currentPlayingTorrent = data[1];
+	downloaderInstance.getTorrentServer(data[1]);
+    }
     
-    streamfile.on('data', function(chunk){
-	    event.sender.send('addData', chunk);
-    });
-
-    
-    /*torrent_hash = downloaderInstance.getTorrentHash(data[1]);
-    event.sender.send('toPlay', [torrent_hash, file.path])*/
+    event.sender.send('toPlay', data[0]);
 })
 
-
-if(in_play != null){
-setInterval(function(){
-    ipc.send('updateProgress', downloaderInstance.getProgress(in_play));
-}, 1000);
-}
+// TODO: Barra de progreso de descarga
