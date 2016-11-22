@@ -3,10 +3,10 @@ const ipc = require('electron').ipcRenderer;
 var webtorrent = require('webtorrent');
 var Updater = require('./mainWindowUpdater.js');
 var updater = new Updater();
-var render = require('render-media')
+var render = require('render-media');
 var from = require('from2');
 var Readable = require('stream').Readable;
-var stream_data;
+var Stream = require('stream');
 
 ipc.on('updatePlayList', (event, data) => {
     updater.reloadList(data[0], data[1]);
@@ -15,15 +15,16 @@ ipc.on('updatePlayList', (event, data) => {
 ipc.on('toPlay', (event, data) => {
 
     var buf = [];
-    stream_data = new Buffer(parseInt(data[1]));
+    var length = parseInt(data[1]);
+    var stream_data = new Buffer(parseInt(data[1]));
 
     
-
+    console.log(data[0]);
     var file = {
 	name: data[0],
 	createReadStream: function(opts){
 	    console.log(stream_data.length);
-	    return from([ stream_data.slice(0, (stream_data.length - 1)) ]);
+	    return from([ stream_data.slice(0, length) ]);
 	}
     }
 
