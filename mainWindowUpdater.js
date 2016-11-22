@@ -38,10 +38,8 @@ Updater.prototype.updateProgress = function(n_torrent){
 // TODO: voy a poner el click listener aqui, pero hay que pensar mejor donde ponerlo
 
 function requestPlay(i, n_torrent){
-    ipcRenderer.send('playRequest', [i, n_torrent]);
-    setTimeout(function(){
-    }, 1000);
-
+    console.log('request_play');
+    ipcRenderer.send('getPlayData', [i, n_torrent]);
 }
 
 

@@ -63,7 +63,7 @@ var ipc = require('electron').ipcMain;
 const Downloader = require("./downloader.js");
 
 var downloaderInstance = new Downloader();
-
+var in_play;
 ipc.on('addTorrent', function(event, data){
 
     data.forEach( function(file){
@@ -73,18 +73,23 @@ ipc.on('addTorrent', function(event, data){
     });
 });
 
-ipc.on('playRequest', function(event, data){
+ipc.on('getPlayData', function(event, data){
+    console.log('get file data stream');
+    in_play = data[1];
+    var streamfile = downloaderInstance.getFileToPlay(data[0], data[1]).createReadStream();
+    event.sender.send('toPlay', [downloaderInstance.getFileToPlay(data[0], data[1]).name, downloaderInstance.getFileToPlay(data[0], data[1]).length]);
 
-    console.log('play request'+ data[0].toString() + 'from torrent' + data[1].toString());
-    file = downloaderInstance.getFileToPlay(data[0], data[1])
-    torrent_hash = downloaderInstance.getTorrentHash(data[1]);
-    event.sender.send('toPlay', [torrent_hash, file.path])
+    streamfile.on('data', function(chunk){
+	event.sender.send('addData', chunk)});
+
+    
+    /*torrent_hash = downloaderInstance.getTorrentHash(data[1]);
+    event.sender.send('toPlay', [torrent_hash, file.path])*/
 })
 
 
-ipc.on('getProgress', (event, data) => {
-    console.log(downloaderInstance.getProgress(data));
-    event.sender.send('progress' ,downloaderInstance.getProgress(data))
-    console.log("He enviado el progreso");
-
-})
+if(in_play != null){
+setInterval(function(){
+    ipc.send('updateProgress', downloaderInstance.getProgress(in_play));
+}, 1000);
+}
