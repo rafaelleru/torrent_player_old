@@ -11,8 +11,8 @@
   </head>
   <body>
     <script src='./drag-drop.js'></script>
-    <div class="container-fluid">  <!-- Top bar -->
-      <div class="row">
+    <div class="container-fluid dark-primary-color">  <!-- Top bar -->
+      <div class="row primary-text-color ">
         <h1>Torrent player</h1>
       </div>
       <div id="progress">
@@ -21,29 +21,18 @@
         </div>
       </div>
     </div>
-<div class="jumbotron" id="dragSection">
-    <h2>DRAG HERE</h2>
-</div>
-
-      <div class="col-md-6 col-xs-6">
-        <ol id="songs_queue">
+      <div class="jumbotron">
+        <ul id="songs_queue">
           <script src='./mainrenderer.js'></script>
+
         </ol>
+      </div>
+
+      <footer id="audioTag" class="footer dark-primary-color" >
+        <div class="barraProgresoAudio"></div>
         <audio id="audio" controls="true"></audio>
-      </div>
-      <div class="col-md-3 col-xs-3">
-      <!-- Imagen del disco si hay -->
-        <div class="">
-
-        </div>
-      </div>
-      <div class="col-md-3 col-xs-3">
-      <!-- Lo de las ips va aqui -->
-        <div class="">
-        </div>
-        <span id="DescargaTotal"></span>
-      </div>
-
+        
+      </footer>
 
   </body>
 </html>
