@@ -19,8 +19,8 @@ ipc.on('toPlay', (event, data) => {
     var stream_data = new Buffer(parseInt(data[1]));
 
     
-    console.log(data[0]);
-    var file = {
+    console.log(data.toString());
+    /*var file = {
 	name: data[0],
 	createReadStream: function(opts){
 	    console.log(stream_data.length);
@@ -38,7 +38,10 @@ ipc.on('toPlay', (event, data) => {
     //console.log(file.createReadStream);
     render.render(file, 'audio', function(err, elem){
 	if(err){ return console.log('error appending') }
-    })
+	})*/
+
+    var audio_tag = document.getElementById('audio');
+    audio_tag.src = 'http://localhost:9999/' + data.toString();
 })
 
 
