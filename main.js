@@ -64,6 +64,7 @@ const Downloader = require("./downloader.js");
 
 var downloaderInstance = new Downloader();
 var in_play;
+
 ipc.on('addTorrent', function(event, data){
 
     data.forEach( function(file){
