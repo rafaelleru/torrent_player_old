@@ -17,6 +17,16 @@
   background-color: #3ADF00;
 }
 
+.jumbotron{
+  border-radius: 12px;
+  border-style: dashed;
+  border-width: 2px;
+  border-color: #BBDBDB;
+}
+
+#dragSection h2{
+  text-align: center;
+}
 .cuadrado{
   width: 230px;
   height: 220px;
