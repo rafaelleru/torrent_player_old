@@ -1,25 +1,25 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "Torrent-Player",
+  "version": "0.0.1",
+  "description": "A small music player that takes the music from your torrent",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron/electron-quick-start.git"
+    "url": "git+https://github.com/rafaelleru/torrent-player.git"
   },
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "music",
+    "torrent",
+    "streaming"
   ],
-  "author": "GitHub",
+  "author": "Rafaelleru",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
+    "url": "https://github.com/rafaelleru/torrent-player/issues"
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
   "devDependencies": {
@@ -31,7 +31,6 @@
   "dependencies": {
     "drag-drop": "^2.12.1",
     "electron": "^1.4.4",
-    "jquery": "^3.1.1",
     "webtorrent": "^0.97.2"
   }
 }
