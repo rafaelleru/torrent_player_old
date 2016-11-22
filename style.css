@@ -1,0 +1,60 @@
+ @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+ body{
+  background-color: #9E9E9E;
+  color: #212121;
+}
+.container-fluid{
+  background-color: #1C1C1C;
+  color: #6622a6;
+}
+.container-fluid .row h1{
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  /*text-shadow: 2px 2px red;*/
+  font-size: 60px;
+}
+.progress-bar{
+  background-color: #3ADF00;
+}
+
+.jumbotron{
+  background-color: #9E9E9E;
+  text-align: center;
+}
+
+#dragSection h2{
+  text-align: center;
+}
+.cuadrado{
+  width: 230px;
+  height: 220px;
+  border-color: red;
+  background-color: yellow;
+}
+
+.ocultar{
+  display: none;
+}
+
+#songs_queue li{
+  cursor:pointer;
+  list-style: none;
+}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+}
+#audio{
+    height: 28px;
+    margin:0 25%;
+}
+
+.barraProgresoAudio{
+  height: 2px;
+  width: 0;
+  background-color: #BDBDBD;
+}
