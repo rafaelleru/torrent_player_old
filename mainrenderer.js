@@ -18,7 +18,7 @@ ipc.on('toPlay', (event, data) => {
     var length = parseInt(data[1]);
     var stream_data = new Buffer(parseInt(data[1]));
 
-    
+
     console.log(data[0]);
     var file = {
 	name: data[0],
@@ -42,8 +42,7 @@ ipc.on('toPlay', (event, data) => {
 })
 
 
-
-ipc.on('updateProgress', (event, data) => { 
+ipc.on('updateProgress', (event, data) => {
     progressBar = document.getElementById('progress-bar');
     progressBar.style.width = data+'%';
     console.log(data);
