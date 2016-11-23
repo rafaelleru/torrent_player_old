@@ -1,8 +1,5 @@
  @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
- body{
-  background-color: #9E9E9E;
-  color: #212121;
-}
+
 .container-fluid{
   background-color: #1C1C1C;
   color: #6622a6;
@@ -51,6 +48,7 @@
 #audio{
     height: 28px;
     margin:0 25%;
+    width: 50%;
 }
 
 .barraProgresoAudio{
