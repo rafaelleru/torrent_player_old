@@ -1,11 +1,8 @@
-// TODO: Eliminar cosas inecesarias
+
 const ipc = require('electron').ipcRenderer;
 var webtorrent = require('webtorrent');
 var Updater = require('./mainWindowUpdater.js');
 var updater = new Updater();
-
-
-
 
 
 ipc.on('updatePlayList', (event, data) => {
