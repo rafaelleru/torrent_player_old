@@ -93,4 +93,9 @@ Downloader.prototype.getTorrentServer = function(n_torrent){
     var server = this.client.torrents[n_torrent].createServer();
     server.listen(9999);
 }
+
+Downloader.prototype.getTorrent = function(n_torrent){
+    return this.client.torrents[n_torrent];
+}
+
 module.exports = Downloader;

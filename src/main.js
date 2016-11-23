@@ -64,6 +64,7 @@ const Downloader = require("./downloader.js");
 
 var downloaderInstance = new Downloader();
 var currentPlayingTorrent;
+var currentPlayingFile;
 
 ipc.on('addTorrent', function(event, data){
 
@@ -75,13 +76,31 @@ ipc.on('addTorrent', function(event, data){
 });
 
 ipc.on('getPlayData', function(event, data){
-    console.log('get file data stream');
+    //console.log(data[0]+' '+ data[1])
     if(currentPlayingTorrent != data[1]){
+	//console.log('setup currentPlayingTorrent');
 	currentPlayingTorrent = data[1];
-	downloaderInstance.getTorrentServer(data[1]);
     }
     
-    event.sender.send('toPlay', data[0]);
+    downloaderInstance.getTorrentServer(data[1]);
+    currentPlayingFile = data[0];
+    event.sender.send('toPlay', currentPlayingFile);
 })
 
+ipc.on('playEnded', function(event, data){
+    if(downloaderInstance.getTorrent(data[1]).files.length == currentPlayingFile){
+	var torequest = 0;
+
+	if(downloaderInstance.getNumberOfTorrents() == currentPlayingTorrent){
+	    tosetserver = 0;
+	} else {
+	    tosetserver = currentPlayingTorrent + 1;
+	}
+    } else {
+	var torequest = currentPlayingFile + 1;
+    }
+    
+    event.sender.send('getPlayData', [torequest, tosetserver]);
+})
+    
 // TODO: Barra de progreso de descarga
