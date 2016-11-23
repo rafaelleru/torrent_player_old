@@ -18,7 +18,7 @@ function createWindow() {
     })
 
     // and load the index.html of the app.
-    mainWindow.loadURL(`file://${__dirname}/index.html`)
+    mainWindow.loadURL(`file://${__dirname}/../index.html`)
 
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
@@ -63,7 +63,8 @@ var ipc = require('electron').ipcMain;
 const Downloader = require("./downloader.js");
 
 var downloaderInstance = new Downloader();
-var in_play;
+var currentPlayingTorrent;
+var currentPlayingFile;
 
 ipc.on('addTorrent', function(event, data){
 
@@ -75,28 +76,31 @@ ipc.on('addTorrent', function(event, data){
 });
 
 ipc.on('getPlayData', function(event, data){
-    console.log('get file data stream');
-    in_play = data[1];
-
-    //Crea el stream del archivo que se va a reproducir
-    var streamfile = downloaderInstance.getFileToPlay(data[0], data[1]).createReadStream();
-
-    //se envia la longiud del archivo en bytes para el buffer.
-    event.sender.send('toPlay', [downloaderInstance.getFileToPlay(data[0], data[1]).name,
-				 downloaderInstance.getFileToPlay(data[0], data[1]).length]);
+    //console.log(data[0]+' '+ data[1])
+    if(currentPlayingTorrent != data[1]){
+	//console.log('setup currentPlayingTorrent');
+	currentPlayingTorrent = data[1];
+    }
     
-    streamfile.on('data', function(chunk){
-	    event.sender.send('addData', chunk);
-    });
-
-    
-    /*torrent_hash = downloaderInstance.getTorrentHash(data[1]);
-    event.sender.send('toPlay', [torrent_hash, file.path])*/
+    downloaderInstance.getTorrentServer(data[1]);
+    currentPlayingFile = data[0];
+    event.sender.send('toPlay', currentPlayingFile);
 })
 
+ipc.on('playEnded', function(event, data){
+    if(downloaderInstance.getTorrent(data[1]).files.length == currentPlayingFile){
+	var torequest = 0;
 
-if(in_play != null){
-setInterval(function(){
-    ipc.send('updateProgress', downloaderInstance.getProgress(in_play));
-}, 1000);
-}
+	if(downloaderInstance.getNumberOfTorrents() == currentPlayingTorrent){
+	    tosetserver = 0;
+	} else {
+	    tosetserver = currentPlayingTorrent + 1;
+	}
+    } else {
+	var torequest = currentPlayingFile + 1;
+    }
+    
+    event.sender.send('getPlayData', [torequest, tosetserver]);
+})
+    
+// TODO: Barra de progreso de descarga
