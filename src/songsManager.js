@@ -1,7 +1,7 @@
 
 const ipc = require('electron').ipcRenderer;
 var webtorrent = require('webtorrent');
-var Updater = require('./mainWindowUpdater.js');
+var Updater = require('./src/mainWindowUpdater.js');
 var updater = new Updater();
 
 
