@@ -2,7 +2,7 @@
   "name": "Torrent-Player",
   "version": "0.0.1",
   "description": "A small music player that takes the music from your torrent",
-  "main": "main.js",
+  "main": "./src/main.js",
   "scripts": {
     "start": "electron ."
   },
