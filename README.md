@@ -16,9 +16,9 @@ I'm not responsable of bad or ilegal use of this application.
 
 ## Thanks to:
 
-(https://github.com/feross)[Feross Aboukhadijeh] for his incredible (https://github.com/feross/webtorrent/blob/master/docs/api.md)[webtorrent API] and help via email and issues.
+[https://github.com/feross](Feross Aboukhadijeh) for his incredible [https://github.com/feross/webtorrent/blob/master/docs/api.md](webtorrent API) and help via email and issues.
 
-(http://osl.ugr.es/)[OSL UGR] members for so much help and specially to (https://github.com/JJ)[JJ Merelo] for motivates me to open the code before it's ready and makes possible to make an amazing work in electron hackaton makes by OSL.
+[http://osl.ugr.es/](OSL UGR) members for so much help and specially to (https://github.com/JJ)[JJ Merelo] for motivates me to open the code before it's ready and makes possible to make an amazing work in electron hackaton makes by OSL.
 
 Thanks also to other members and collegues that help me, I can't name them all. His names will be in the contributions page.
 
