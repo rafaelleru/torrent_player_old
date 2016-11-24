@@ -82,6 +82,8 @@ ipc.on('getPlayData', function(event, data){
     var nFiles = downloaderInstance.getTorrent(torr).files.length;
     var nTorr = downloaderInstance.getNTorrents();
 
+    console.log(data[1]);
+
     if(nFiles >= data[0]){
 	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
 	console.log('file number: ' + data[0].toString());
@@ -93,7 +95,7 @@ ipc.on('getPlayData', function(event, data){
 	event.sender.send('toPlay', [data[0], data[1]]);
     } else {
 	if(nTorr >= data[1] + 1){
-	    //Si existe el siguiente torrent empezamos a reproducirlo.
+	    //Si existe el siguiente torrent empezamos a reproducirlo.'
 	    currentPlayingTorrent = data[1];
 	    downloaderInstance.initTorrentServer(data[1] + 1);
 	    

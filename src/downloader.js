@@ -90,6 +90,7 @@ Downloader.prototype.getTorrentHash = function(n_torrent){
 }
 
 Downloader.prototype.initTorrentServer = function(n_torrent){
+    //console.log(n_torrent);
     var server = this.client.torrents[n_torrent].createServer();
     server.listen(9999);
 }
