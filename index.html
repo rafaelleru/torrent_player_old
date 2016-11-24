@@ -4,35 +4,39 @@
     <meta charset="UTF-8">
     <title>Reproductor de musica</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="palette.css" media="screen" title="no title">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="palette.css">
-
 
   </head>
-  <body>
-    <div class="container-fluid dark-primary-color">  <!-- Top bar -->
-      <div class="row primary-text-color ">
-        <h1>Torrent player</h1>
-      </div>
-      <div id="progress">
-        <div class="progress">
-          <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-        </div>
-      </div>
-    </div>
-      <div class="jumbotron">
-        <ul id="songs_queue">
-          
+  <body class="dark-primary-color">
+     <div class="container">
+       <div class="row">
+         <div class="col-md-1">
+           Nº
+         </div>
+         <div class="col-md-3">
+           Song
+         </div>
+         <div class="col-md-3">
+           Artist
+         </div>
+         <div class="col-md-3">
+           Disc
+         </div>
+         <div class="col-md-1">
+           <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+         </div>
+         <hr class="divider-color">
+       </div>
+     </div>
+     <ol id=songs_queue>
 
-        </ol>
-      </div>
+     </ol>
+     <footer id="audioTag" class="footer dark-primary-color" >
+       <div class="barraProgresoAudio"></div>
+       <audio id="audio" controls="true"></audio>
 
-      <footer id="audioTag" class="footer dark-primary-color" >
-        <div class="barraProgresoAudio"></div>
-        <audio id="audio" controls="true"></audio>
-        
-      </footer>
-      <script src='./src/songsManager.js'></script>
-      <script src='./src/drag-drop.js'></script>
+     </footer>
+     <script src="./src/drag-drop.js"></script>
+     <script src="./src/songsManager.js"></script>
   </body>
-</html>

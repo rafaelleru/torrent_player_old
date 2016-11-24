@@ -1,6 +1,8 @@
 //author: @rafaelleru
 
-const {ipcRenderer} = require('electron')
+const {ipcRenderer} = require('electron');
+
+var currentPlayingFile;
 
 function Updater(){
     this.list = [];
@@ -35,10 +37,10 @@ Updater.prototype.updateProgress = function(n_torrent){
      document.getElementById('progress-bar').style.width = n_torrent+"%";
 
 };
-// TODO: voy a poner el click listener aqui, pero hay que pensar mejor donde ponerlo
 
 function requestPlay(i, n_torrent){
     console.log('request_play');
+    currentPlayingFile = i;
     ipcRenderer.send('getPlayData', [i, n_torrent]);
 }
 
@@ -48,6 +50,5 @@ Updater.prototype.play = function (file){
     var stream  = file;
     console.log(stream.data());
 }
-
 
 module.exports = Updater;

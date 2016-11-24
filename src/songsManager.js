@@ -19,7 +19,7 @@ ipc.on('toPlay', (event, data) => {
 
     audio_tag.onended = function(){
 	console.log('se acabo la reproduccion');
-	ipc.send('playEnded', []);
+	ipc.send('getPlayData', [data+1, 0]); // TODO: cambiar el 0 por el torrent actualmente en reproduccion
     }
 
 })
@@ -34,3 +34,14 @@ ipc.on('updateProgress', (event, data) => {
     audio.style.display = 'block';
 })
 
+
+
+ipc.on('playEnded', (event, data) => {
+    //Aqui compruebo si es la ultima cancion para saltar al siguiente torrent
+    // y si es el ultimo torrent vuelvo al primero
+
+    currentPlayingFile = data+1;
+    console.log('salto a la siguiente cancion' + currentPlayingFile.toString());
+   
+    ipc.send('getPlayData', [currentPlayingFile, currentPlayingTorrent]);
+})
