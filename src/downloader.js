@@ -89,13 +89,17 @@ Downloader.prototype.getTorrentHash = function(n_torrent){
     return this.client.torrents[n_torrent].infoHash;
 }
 
-Downloader.prototype.getTorrentServer = function(n_torrent){
+Downloader.prototype.initTorrentServer = function(n_torrent){
     var server = this.client.torrents[n_torrent].createServer();
     server.listen(9999);
 }
 
 Downloader.prototype.getTorrent = function(n_torrent){
     return this.client.torrents[n_torrent];
+}
+
+Downloader.prototype.getNTorrents = function(){
+    return this.client.torrents.length;
 }
 
 module.exports = Downloader;

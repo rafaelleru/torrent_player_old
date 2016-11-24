@@ -5,7 +5,7 @@ var Updater = require('./src/mainWindowUpdater.js');
 var updater = new Updater();
 var audio_tag = document.getElementById('audio');
 var currentPlay;
-
+var currentTorrent;
 ipc.on('updatePlayList', (event, data) => {
     updater.reloadList(data[0], data[1]);
 });
@@ -13,13 +13,15 @@ ipc.on('updatePlayList', (event, data) => {
 ipc.on('toPlay', (event, data) => {
   
     console.log(data.toString());
+    currentTorrent = data[1];
     
-    audio_tag.src = 'http://localhost:9999/' + data.toString();
+    audio_tag.src = 'http://localhost:9999/' + data[0].toString();
     audio_tag.play();
+
 
     audio_tag.onended = function(){
 	console.log('se acabo la reproduccion');
-	ipc.send('getPlayData', [data+1, 0]); // TODO: cambiar el 0 por el torrent actualmente en reproduccion
+	ipc.send('getPlayData', [data+1, currentTorrent]); 
     }
 
 })
