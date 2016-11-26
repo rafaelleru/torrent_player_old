@@ -9,6 +9,7 @@ function Downloader(){
     this._torrentsArray = [];
     this.client = new WebTorrent();
     this.tID;
+    this.server;
 };
 
 
@@ -91,8 +92,8 @@ Downloader.prototype.getTorrentHash = function(n_torrent){
 
 Downloader.prototype.initTorrentServer = function(n_torrent){
     //console.log(n_torrent);
-    var server = this.client.torrents[n_torrent].createServer();
-    server.listen(9999);
+    this.server = this.client.torrents[n_torrent].createServer();
+    this.server.listen(9999);
 }
 
 Downloader.prototype.getTorrent = function(n_torrent){
@@ -103,4 +104,8 @@ Downloader.prototype.getNTorrents = function(){
     return this.client.torrents.length;
 }
 
+Downloader.prototype.closeTorrentServer = function(){
+    this.server.close();
+}
+    
 module.exports = Downloader;
