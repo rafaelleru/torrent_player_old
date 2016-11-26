@@ -27,29 +27,12 @@ Downloader.prototype.addTorrent = function(torrent, callback){
 	callback();
     }); // esto debería ser lo mismo que lo de abajo
 };
-Downloader.prototype.setFileMorePriority = function(file) {
-    this.client.files[file].select();
-};
 
 Downloader.prototype.setFileBuffer = function(file) {
   // esto es una variable global? - JJ
     stream  = this.client.files[file].getBuffer();
     //poner a reproducir el buffer
 };
-
-Downloader.prototype.getFiles = function(){
-  var files_ = [];
-  var torrent_files = this.client.torrents;
-
-  // TODO: esas dos funciones anidadas son raras.
-  torrent_files.forEach( function(file_){
-    file_.files.forEach( function(f){
-      files_.push(f);
-    })
-  })
-
-  return files_;
-}
 
 Downloader.prototype.getLastFiles = function(){
     this.client.torrents.forEach( function (f) {
@@ -82,10 +65,6 @@ Downloader.prototype.getFileToPlay = function(file, torrent){
     return this.client.torrents[torrent].files[file];
 }
 
-Downloader.prototype.getProgress2 = function(n_torrent){
-    return this.client.torrents[n_torrent].progress;
-}
-
 Downloader.prototype.getTorrentHash = function(n_torrent){
     return this.client.torrents[n_torrent].infoHash;
 }
@@ -107,5 +86,9 @@ Downloader.prototype.getNTorrents = function(){
 Downloader.prototype.closeTorrentServer = function(){
     this.server.close();
 }
-    
+
+Downloader.prototype.getTorrentFiles = function(n_torrent){
+    return this.client.torrents[n_torrent].files;
+}
+
 module.exports = Downloader;
