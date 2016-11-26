@@ -123,11 +123,11 @@ ipc.on('getPlayData', function(event, data){
     } else {
 	if(nTorr >= data[1] + 1){
 	    console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
-	    currentPlayingTorrent = data[1];
+	    currentPlayingTorrent = data[1] + 1;
 	    downloaderInstance.closeTorrentServer();
-	    downloaderInstance.initTorrentServer(data[1] + 1);
+	    downloaderInstance.initTorrentServer(currentPlayingTorrent);
 	    
-	    event.sender.send('toPlay', [0, data[1] + 1]);
+	    event.sender.send('toPlay', [0, currentPlayingTorrent]);
 	} else {
 	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
 	    curretPlayingTorrent = 0;
