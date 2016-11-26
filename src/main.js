@@ -107,8 +107,10 @@ ipc.on('getPlayData', function(event, data){
 	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
 	console.log('file number: ' + data[0].toString());
 	if(currentPlayingTorrent != data[1]){
+	    if(currentPlayingTorrent != undefined)
+		downloaderInstance.closeTorrentServer();
+
 	    currentPlayingTorrent = data[1];
-	    //downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(data[1]);
 	}
 	
