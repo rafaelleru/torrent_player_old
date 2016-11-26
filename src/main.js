@@ -1,9 +1,15 @@
-
+//author: rafaelleru
 const electron = require('electron')
+const shortcut = require('electron-localshortcut');
+var ipc = require('electron').ipcMain;
+
+
 // Module to control application life.
 const app = electron.app
     // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+
+//Para establecer teclas que funcionen en la app. PE: play/pause con espacio.
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -20,6 +26,8 @@ function createWindow() {
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/../index.html`)
 
+    
+
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
 
@@ -30,12 +38,22 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
+
+    //Registramos los eventos justo al cargar la aplicacion
+
+    shortcut.register('Space', function(){
+	mainWindow.send('PlayPause', isPaused);
+    });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.on('ready', createWindow)
+app.on('ready', createWindow, function(){
+    const ret = globalShortcut.register('Space', () => {
+	console.log('CommandOrControl+X is pressed');
+    })
+})
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function() {
@@ -48,7 +66,7 @@ app.on('window-all-closed', function() {
 
 app.on('activate', function() {
     // On OS X it's common to re-create a window in the app when the
-nnnn    // dock icon is clicked and there are no other windows open.
+    // dock icon is clicked and there are no other windows open.
     if (mainWindow === null) {
         createWindow()
     }
@@ -57,15 +75,13 @@ nnnn    // dock icon is clicked and there are no other windows open.
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-
-var ipc = require('electron').ipcMain;
-
 const Downloader = require("./downloader.js");
 
 var downloaderInstance = new Downloader();
 var currentPlayingTorrent;
 var currentPlayingFile = 0;
 
+//Mover esto a otro archivo.
 ipc.on('addTorrent', function(event, data){
 
     data.forEach( function(file){
@@ -84,10 +100,16 @@ ipc.on('getPlayData', function(event, data){
 
     console.log(data[1]);
 
+    //cada vez que se hace click en una cancion se reproduc
+    isPaused = false;
+    
     if(nFiles >= data[0]){
 	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
 	console.log('file number: ' + data[0].toString());
 	if(currentPlayingTorrent != data[1]){
+	    if(currentPlayingTorrent != undefined)
+		downloaderInstance.closeTorrentServer();
+
 	    currentPlayingTorrent = data[1];
 	    downloaderInstance.initTorrentServer(data[1]);
 	}
