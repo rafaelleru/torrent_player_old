@@ -98,12 +98,14 @@ ipc.on('getPlayData', function(event, data){
     var nFiles = downloaderInstance.getTorrent(torr).files.length;
     var nTorr = downloaderInstance.getNTorrents();
 
+    nFiles = nFiles;
+    nTorr = nTorr;
     console.log(data[1]);
 
     //cada vez que se hace click en una cancion se reproduc
     isPaused = false;
-    
-    if(nFiles >= data[0]){
+
+    if(nFiles >= data[0] && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
 	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
 	console.log('file number: ' + data[0].toString());
 	if(currentPlayingTorrent != data[1]){
@@ -117,14 +119,16 @@ ipc.on('getPlayData', function(event, data){
 	event.sender.send('toPlay', [data[0], data[1]]);
     } else {
 	if(nTorr >= data[1] + 1){
-	    //Si existe el siguiente torrent empezamos a reproducirlo.'
+	    console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
 	    currentPlayingTorrent = data[1];
+	    downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(data[1] + 1);
 	    
 	    event.sender.send('toPlay', [0, data[1] + 1]);
 	} else {
 	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
 	    curretPlayingTorrent = 0;
+	    downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(0);
 
 	    event.sender.send('toPlay', [0, 0]);

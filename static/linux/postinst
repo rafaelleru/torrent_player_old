@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+chmod +x /opt/spoty5-desktop/Spoty5
+ln -s -f /opt/spoty5-desktop/Spoty5 /usr/bin/spoty5-desktop

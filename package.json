@@ -28,24 +28,29 @@
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
   "devDependencies": {
-    "electron": "^1.3.4",
     "should": "^11.1.1",
     "webtorrent-fixtures": "^1.5.0",
-    "mocha": "^2.1.0",
-    "electron-osx-sign": "^0.3.0",
-    "electron-packager": "^6.0.2",
+    "mocha": "^3.2.0",
+    "electron-osx-sign": "^0.4.1",
+    "electron-packager": "^8.3.0",
     "gh-release": "^2.0.3",
-    "nobin-debian-installer": "^0.0.9",
-    "plist": "^1.2.0",
-    "standard": "^6.0.5"
+    "nobin-debian-installer": "^0.0.10",
+    "plist": "^2.0.1",
+    "standard": "^8.6.0"
   },
   "dependencies": {
-    "application-config": "^0.2.0",
+    "application-config": "^1.0.1",
     "application-config-path": "^0.1.0",
     "drag-drop": "^2.12.1",
     "electron": "^1.4.4",
-    "electron-localshortcut": "^0.6.1",
-    "electron-prebuilt": "0.37.5",
-    "webtorrent": "^0.97.2"
-  }
+    "electron-localshortcut": "^1.0.0",
+    "webtorrent": "^0.98.0"
+  },
+  "scripts": {
+        "clean": "node ./bin/clean.js",
+        "package": "npm install && npm prune && npm dedupe && node ./bin/package.js",
+        "size": "npm run package -- darwin && du -ch dist/Alexandria-darwin-x64 | grep total",
+        "start": "electron .",
+        "test": "standard"
+    }
 }
