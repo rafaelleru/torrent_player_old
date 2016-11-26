@@ -25,3 +25,46 @@ Thanks so much also to other members that help me, I can't name them all. His na
 ## Instalation
 
 clone and run  ``npm i`` and then ``npm start``.
+
+### Install dependencies
+
+```
+$ npm install
+```
+
+### Run app
+
+```
+$ npm start
+```
+
+### Package app
+
+Builds app binaries for OS X, Linux, and Windows.
+
+```
+$ npm run package
+```
+
+To build for one platform:
+
+```
+$ npm run package -- [platform] [package-type]
+```
+
+Where `[platform]` is `darwin`, `linux`, or `win32`
+
+and `[package-type]` is `all` (default), `deb` or `zip` (`linux` platform only)
+
+#### Windows build notes
+
+To package the Windows app from non-Windows platforms, [Wine](https://www.winehq.org/) needs
+to be installed.
+
+On OS X, first install [XQuartz](http://www.xquartz.org/), then run:
+
+```
+brew install wine
+```
+
+(Requires the [Homebrew](http://brew.sh/) package manager.)
