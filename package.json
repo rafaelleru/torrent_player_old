@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "node ./bin/clean.js",
     "package": "npm install && npm prune && npm dedupe && node ./bin/package.js",
-    "size": "npm run package -- darwin && du -ch dist/TorrentPlayer-darwin-x64 | grep total",
+    "size": "npm run package -- darwin && du -ch dist/Torrent-Player-darwin-x64 | grep total",
     "start": "electron .",
     "test": "standard",
     "update-authors": "./bin/update-authors.sh"
@@ -36,20 +36,21 @@
     "gh-release": "^2.0.3",
     "nobin-debian-installer": "^0.0.10",
     "plist": "^2.0.1",
+    "electron-winstaller": "^2.4.1",
     "standard": "^8.6.0"
   },
   "dependencies": {
     "application-config": "^1.0.1",
     "application-config-path": "^0.1.0",
     "drag-drop": "^2.12.1",
-    "electron": "^1.4.4",
+    "electron": "1.4.8",
     "electron-localshortcut": "^1.0.0",
     "webtorrent": "^0.98.0"
   },
   "scripts": {
         "clean": "node ./bin/clean.js",
         "package": "npm install && npm prune && npm dedupe && node ./bin/package.js",
-        "size": "npm run package -- darwin && du -ch dist/Alexandria-darwin-x64 | grep total",
+        "size": "npm run package -- darwin && du -ch dist/Torrent-Player-darwin-x64 | grep total",
         "start": "electron .",
         "test": "standard"
     }

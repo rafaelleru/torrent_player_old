@@ -24,14 +24,17 @@ function build () {
     buildWin32(printDone)
   } else if (platform === 'linux') {
     buildLinux(packageType, printDone)
-  } else {
+  } else {/*
     buildDarwin(function (err, buildPath) {
       printDone(err, buildPath)
       buildWin32(function (err, buildPath) {
         printDone(err, buildPath)
         buildLinux(packageType, printDone)
       })
-    })
+    })*/
+    buildDarwin(printDone)
+    buildWin32(printDone)
+    buildLinux(packageType, printDone)
   }
 }
 
@@ -65,7 +68,7 @@ var all = {
 
   // Pattern which specifies which files to ignore when copying files to create the
   // package(s).
-  ignore: /^\/dist|\/(appveyor.yml|\.appveyor.yml|\.github|appdmg|AUTHORS|CONTRIBUTORS|bench|benchmark|benchmark\.js|bin|bower\.json|component\.json|coverage|doc|docs|docs\.mli|dragdrop\.min\.js|example|examples|example\.html|example\.js|externs|ipaddr\.min\.js|Makefile|min|minimist|perf|rusha|simplepeer\.min\.js|simplewebsocket\.min\.js|static\/screenshot\.png|test|tests|test\.js|tests\.js|alexandria\.min\.js|\.[^\/]*|.*\.md|.*\.markdown)$/,
+  ignore: /^\/dist|\/(appveyor.yml|\.appveyor.yml|\.github|appdmg|AUTHORS|CONTRIBUTORS|bench|benchmark|benchmark\.js|bin|bower\.json|component\.json|coverage|doc|docs|docs\.mli|dragdrop\.min\.js|example|examples|example\.html|example\.js|externs|ipaddr\.min\.js|Makefile|min|minimist|perf|rusha|simplepeer\.min\.js|simplewebsocket\.min\.js|static\/screenshot\.png|test|tests|test\.js|tests\.js|torrent-player\.min\.js|\.[^\/]*|.*\.md|.*\.markdown)$/,
 
   // The application name.
   name: config.APP_NAME,
@@ -81,21 +84,21 @@ var all = {
   prune: true,
 
   // The Electron version with which the app is built (without the leading 'v')
-  version: pkg.dependencies['electron-prebuilt']
+  version: pkg.dependencies['electron']
 }
 
 var darwin = {
   platform: 'darwin',
 
   // The bundle identifier to use in the application's plist (OS X only).
-  'app-bundle-id': 'io.alexandria.alexandria',
+  'app-bundle-id': 'io.torrent-player.torrent-player',
 
   // The application category type, as shown in the Finder via "View" -> "Arrange by
   // Application Category" when viewing the Applications directory (OS X only).
   'app-category-type': 'public.app-category.utilities',
 
   // The bundle identifier to use in the application helper's plist (OS X only).
-  'helper-bundle-id': 'io.alexandria.alexandria-helper',
+  'helper-bundle-id': 'io.torrent-player.torrent-player-helper',
 
   // Application icon.
   icon: config.APP_ICON + '.icns'

@@ -39,7 +39,6 @@ Updater.prototype.updateProgress = function(n_torrent){
 };
 
 function requestPlay(i, n_torrent){
-    console.log('request_play');
     currentPlayingFile = i;
     ipcRenderer.send('getPlayData', [i, n_torrent]);
 }
