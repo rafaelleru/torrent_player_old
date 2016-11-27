@@ -7,8 +7,8 @@ var APP_VERSION = require('./package.json').version
 
 module.exports = {
   APP_COPYRIGHT: 'Copyright © 2016 ' + APP_TEAM,
-  APP_FILE_ICON: path.join(__dirname, 'static', 'torrentPlayerFile'),
-  APP_ICON: path.join(__dirname, 'static', 'torrentPlayer'),
+  APP_FILE_ICON: path.join(__dirname, 'static', 'Torrent-PlayerFile'),
+  APP_ICON: path.join(__dirname, 'static', 'Torrent-Player'),
   APP_NAME: APP_NAME,
   APP_TEAM: APP_TEAM,
   APP_VERSION: APP_VERSION,

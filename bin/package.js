@@ -56,7 +56,7 @@ var all = {
 
   // A glob expression, that unpacks the files with matching names to the
   // "app.asar.unpacked" directory.
-  'asar-unpack': 'torrent-player*',
+  'asar-unpack': 'Torrent-Player*',
 
   // The build version of the application. Maps to the FileVersion metadata property on
   // Windows, and CFBundleVersion on OS X. We're using the short git hash (e.g. 'e7d837e')
@@ -68,7 +68,7 @@ var all = {
 
   // Pattern which specifies which files to ignore when copying files to create the
   // package(s).
-  ignore: /^\/dist|\/(appveyor.yml|\.appveyor.yml|\.github|appdmg|AUTHORS|CONTRIBUTORS|bench|benchmark|benchmark\.js|bin|bower\.json|component\.json|coverage|doc|docs|docs\.mli|dragdrop\.min\.js|example|examples|example\.html|example\.js|externs|ipaddr\.min\.js|Makefile|min|minimist|perf|rusha|simplepeer\.min\.js|simplewebsocket\.min\.js|static\/screenshot\.png|test|tests|test\.js|tests\.js|torrent-player\.min\.js|\.[^\/]*|.*\.md|.*\.markdown)$/,
+  ignore: /^\/dist|\/(appveyor.yml|\.appveyor.yml|\.github|appdmg|AUTHORS|CONTRIBUTORS|bench|benchmark|benchmark\.js|bin|bower\.json|component\.json|coverage|doc|docs|docs\.mli|dragdrop\.min\.js|example|examples|example\.html|example\.js|externs|ipaddr\.min\.js|Makefile|min|minimist|perf|rusha|simplepeer\.min\.js|simplewebsocket\.min\.js|static\/screenshot\.png|test|tests|test\.js|tests\.js|Torrent-Player\.min\.js|\.[^\/]*|.*\.md|.*\.markdown)$/,
 
   // The application name.
   name: config.APP_NAME,
@@ -91,14 +91,14 @@ var darwin = {
   platform: 'darwin',
 
   // The bundle identifier to use in the application's plist (OS X only).
-  'app-bundle-id': 'io.torrent-player.torrent-player',
+  'app-bundle-id': 'io.Torrent-Player.Torrent-Player',
 
   // The application category type, as shown in the Finder via "View" -> "Arrange by
   // Application Category" when viewing the Applications directory (OS X only).
   'app-category-type': 'public.app-category.utilities',
 
   // The bundle identifier to use in the application helper's plist (OS X only).
-  'helper-bundle-id': 'io.torrent-player.torrent-player-helper',
+  'helper-bundle-id': 'io.Torrent-Player.Torrent-Player-helper',
 
   // Application icon.
   icon: config.APP_ICON + '.icns'
