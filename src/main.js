@@ -42,7 +42,7 @@ function createWindow() {
     //Registramos los eventos justo al cargar la aplicacion
 
     shortcut.register('Space', function(){
-	mainWindow.send('PlayPause', isPaused);
+	mainWindow.send('PlayPause', []);
     });
 }
 
@@ -78,7 +78,7 @@ app.on('activate', function() {
 const Downloader = require("./downloader.js");
 
 var downloaderInstance = new Downloader();
-var currentPlayingTorrent;
+var currentPlayingTorrent ;
 var currentPlayingFile = 0;
 
 //Mover esto a otro archivo.
@@ -91,52 +91,42 @@ ipc.on('addTorrent', function(event, data){
     });
 });
 
-ipc.on('getPlayData', function(event, data){
-    var torr = data[1];
+ipc.on('getPlayData', function(event, data) {
+    var torrent = data[1];
     var file = data[0];
 
-    var nFiles = downloaderInstance.getTorrent(torr).files.length;
-    var nTorr = downloaderInstance.getNTorrents();
-
-    nFiles = nFiles;
-    nTorr = nTorr;
-    console.log(data[1]);
-
-    //cada vez que se hace click en una cancion se reproduc
-    isPaused = false;
-    /*while(data[0] == 0 && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
-	data[0] = data[0] + 1;
-    }*/
-
-    if(nFiles >= data[0] && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
-	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
-	console.log('file number: ' + data[0].toString());
-	if(currentPlayingTorrent != data[1]){
-	    if(currentPlayingTorrent != undefined)
-		downloaderInstance.closeTorrentServer();
-
-	    currentPlayingTorrent = data[1];
-	    downloaderInstance.initTorrentServer(data[1]);
-	}
-	
-	event.sender.send('toPlay', [data[0], data[1]]);
-    } else {
-	if(nTorr >= data[1] + 1){
-	    console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
-	    currentPlayingTorrent = data[1] + 1;
-	    downloaderInstance.closeTorrentServer();
-	    downloaderInstance.initTorrentServer(currentPlayingTorrent);
-	    
-	    event.sender.send('toPlay', [0, data[1] + 1]);
-	} else {
-	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
-	    curretPlayingTorrent = 0;
-	    downloaderInstance.closeTorrentServer();
-	    downloaderInstance.initTorrentServer(0);
-
-	    event.sender.send('toPlay', [0, 0]);
+    if(file <= downloaderInstance.getTorrentFiles(torrent).length){
+	var i = file;
+	while(downloaderInstance.getTorrentFiles(torrent)[i].name.indexOf('mp3') == -1 &&
+	     file <= downloaderInstance.getTorrentFiles(torrent).length){
+	    file++;
 	}
     }
+
+    if(file >= downloaderInstance.getTorrentFiles(torrent).length){
+	torrent++;
+	file = 0;
+	while(downloaderInstance.getTorrentFiles(torrent)[file].name.indexOf('mp3') == -1 &&
+	     file <= downloaderInstance.getTorrentFiles(torrent).length){
+	    file++;
+	}
+    }
+
+    if(torrent > downloaderInstance.getNTorrents()){
+	file = 0;
+	torrent = 0;
+    }
+
+    if(torrent != currentPlayingTorrent){
+	currentPlayingTorrent = torrent;
+	if(currentPlayingTorrent != undefined)
+	    downloaderInstance.closeTorrentServer();
+
+	downloaderInstance.initTorrentServer(currentPlayingTorrent);
+    }
+
+    console.log('toplay ' + file.toString() + '(' + downloaderInstance.getTorrentFiles(torrent)[file].name + ')' + ' from ' + torrent.toString());
+    event.sender.send('toPlay', [file, torrent]);
 })
 
 // TODO: Barra de progreso de descarga
