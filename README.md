@@ -24,4 +24,8 @@ Thanks so much also to other members that help me, I can't name them all. His na
 
 ## Instalation
 
-clone and run  ``npm i`` and then ``npm start``.
+Follow these steps:
+ - Fork this repository
+ - Clone it with ``git clone git@github.com:<your_user_id>/torrent_player.git``
+ - Run  ``npm i`` 
+ - Finally start it: ``npm start``.
