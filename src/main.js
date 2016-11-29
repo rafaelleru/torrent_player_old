@@ -26,10 +26,10 @@ function createWindow() {
     // and load the index.html of the app.
     mainWindow.loadURL(`file://${__dirname}/../index.html`)
 
-    
+
 
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    //jmainWindow.webContents.openDevTools()
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function() {
@@ -115,7 +115,7 @@ ipc.on('getPlayData', function(event, data){
 	    currentPlayingTorrent = data[1];
 	    downloaderInstance.initTorrentServer(data[1]);
 	}
-	
+
 	event.sender.send('toPlay', [data[0], data[1]]);
     } else {
 	if(nTorr >= data[1] + 1){
@@ -123,7 +123,7 @@ ipc.on('getPlayData', function(event, data){
 	    currentPlayingTorrent = data[1];
 	    downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(data[1] + 1);
-	    
+
 	    event.sender.send('toPlay', [0, data[1] + 1]);
 	} else {
 	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
@@ -145,8 +145,8 @@ ipc.on('playEnded', (event, data) => {
 
     currentPlayingFile = data+1;
     console.log('salto a la siguiente cancion' + currentPlayingFile.toString());
-   
+
     console.log('reproduzco la siguiente cancion');
 
-    
+
 })
