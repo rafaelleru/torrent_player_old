@@ -24,4 +24,4 @@ Thanks so much also to other members that help me, I can't name them all. His na
 
 ## Instalation
 
-clone and run  ``npm i`` and then ``npm start``.
+clone and run  ``npm i && bower install`` and then ``npm start``.
