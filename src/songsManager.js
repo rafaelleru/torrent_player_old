@@ -20,7 +20,7 @@ ipc.on('toPlay', (event, data) => {
     audio_tag.src = 'http://localhost:9999/' + data[0].toString();
     audio_tag.title=data[2].toString();
  
-    audio_tag.onended = function(){
+    audio_tag._onEnd = function(){
 	console.log('play end, to play ' + data[0].toString() + 'from torrent number: ' + data[1].toString());
 	ipc.send('getPlayData', [data[0]+1, currentTorrent]);
     }
