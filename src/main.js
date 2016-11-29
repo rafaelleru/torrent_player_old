@@ -116,7 +116,7 @@ ipc.on('getPlayData', function(event, data){
 	    downloaderInstance.initTorrentServer(data[1]);
 	}
 
-	event.sender.send('toPlay', [data[0], data[1]]);
+	event.sender.send('toPlay', [data[0], data[1], downloaderInstance.getTorrentFiles(data[1])[data[0]].name]);
     } else {
 	if(nTorr >= data[1] + 1){
 	    console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
@@ -124,14 +124,14 @@ ipc.on('getPlayData', function(event, data){
 	    downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(data[1] + 1);
 
-	    event.sender.send('toPlay', [0, data[1] + 1]);
+	    event.sender.send('toPlay', [0, data[1] + 1, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
 	} else {
 	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
 	    curretPlayingTorrent = 0;
 	    downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(0);
 
-	    event.sender.send('toPlay', [0, 0]);
+	    event.sender.send('toPlay', [0, 0, downloaderInstance.getTorrentFiles(0)[0].name]);
 	}
     }
 })

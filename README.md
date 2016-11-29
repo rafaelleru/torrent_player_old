@@ -22,6 +22,13 @@ I'm not responsable of bad or ilegal use of this application.
 
 Thanks so much also to other members that help me, I can't name them all. His names will be in the [Contributor's page](https://github.com/rafaelleru/torrent_player/network/members).
 
-## Instalation
 
-clone and run  ``npm i && bower install`` and then ``npm start``.
+## Installing and First Run
+
+Follow these steps:
+ - Fork this repository
+ - Clone it with ``git clone git@github.com:<your_user_id>/torrent_player.git``
+ - Run  ``npm i`` 
+ - Run  ``bower install``
+ - Install electron: npm install electron-prebuilt -g
+ - Finally start it: ``electron .``.
