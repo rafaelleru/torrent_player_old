@@ -13,25 +13,26 @@ ipc.on('updatePlayList', (event, data) => {
 });
 
 ipc.on('toPlay', (event, data) => {
-  
+
     currentTorrent = data[1];
 
-    //console.log('current Torrent in play: ' + currentTorrent.toString());    
+    //console.log('current Torrent in play: ' + currentTorrent.toString());
     audio_tag.src = 'http://localhost:9999/' + data[0].toString();
+    audio_tag.title=data[0].toString();
     play = true;
     audio_tag.play();
 
 
     audio_tag.onended = function(){
 	console.log('play end, to play ' + data[0].toString() + 'from torrent number: ' + data[1].toString());
-	ipc.send('getPlayData', [data[0]+1, currentTorrent]); 
+	ipc.send('getPlayData', [data[0]+1, currentTorrent]);
     }
 
 })
 
 
 
-ipc.on('updateProgress', (event, data) => { 
+ipc.on('updateProgress', (event, data) => {
     progressBar = document.getElementById('progress-bar');
     progressBar.style.width = data+'%';
     console.log(data);

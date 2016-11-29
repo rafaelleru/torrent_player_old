@@ -14,17 +14,51 @@ Updater.prototype.reloadList = function(files, n_torrent){
     console.log(files.length.toString() + ' archivos del torrent: '+ n_torrent.toString());
 
     for(var i=0; i < files.length; i++){
+      console.log(i);
+      if(files[i].name.includes('mp3',files[i].name.length - 4)){
+        var div_row = document.createElement('div');
+        div_row.setAttribute('class','torrent');
+      /* First column */
+          var number_element = document.createElement('div');
+          number_element.setAttribute('id',i);
+          number_element.setAttribute('class',"col-md-1 col-sm-1 col-xs-1");
+          number_element.innerHTML=i;
+          div_row.appendChild(number_element);
 
-        var list_element = document.createElement('li');
-        list_element.setAttribute('id', 'item_'+ i.toString() + '_' + n_torrent.toString());
+      /* Second column */
+          var title_element = document.createElement('div');
+          title_element.setAttribute('id', 'item_'+ i.toString() + '_' + n_torrent.toString());
+          title_element.setAttribute('class', "col-md-3 col-sm-3 col-xs-3");
+          title_element.innerHTML=files[i].name;
+          div_row.appendChild(title_element);
 
-        if(files[i].name.includes('mp3',files[i].name.length - 4)){
-            list_element.innerHTML=files[i].name;
-            this.list_div.appendChild(list_element);
+      /*Third column */
+        var album_element = document.createElement("div");
+        album_element.setAttribute('id', 'unAlbum');
+        album_element.setAttribute('class', "col-md-3 col-sm-3 col-xs-3");
+        album_element.innerHTML='album';
+        div_row.appendChild(album_element);
+
+        /* Fourth column */
+          var artist_element = document.createElement("div");
+          artist_element.setAttribute('id', 'unArtista');
+          artist_element.setAttribute('class', "col-md-3 col-sm-3 col-xs-3");
+          artist_element.innerHTML='artista';
+          div_row.appendChild(artist_element);
+
+        /*Fifth column*/
+          var time_element = document.createElement('div');
+          time_element.setAttribute('id', 'time');
+          time_element.setAttribute('class', "col-md-2 col-sm-2 col-xs-2");
+          time_element.innerHTML='0:00';
+          div_row.appendChild(time_element);
+
+          this.list_div.appendChild(div_row);
+          this.list_div.appendChild(document.createElement('br'));
         }
 
 	(function (i){
-	    list_element.onclick = function(){
+	    title_element.onclick = function(){
 		requestPlay(i, n_torrent-1);
 	    };
 	})(i);
