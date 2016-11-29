@@ -28,5 +28,6 @@ Follow these steps:
  - Fork this repository
  - Clone it with ``git clone git@github.com:<your_user_id>/torrent_player.git``
  - Run  ``npm i`` 
+ - Run  ``bower install``
  - Install electron: npm install electron-prebuilt -g
  - Finally start it: ``electron .``.
