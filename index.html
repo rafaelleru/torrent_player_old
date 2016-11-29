@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="palette.css" media="screen" title="no title">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link rel="import" href="bower_components/play-list-interface/play-list-interface.html">
+    <link rel="import" href="bower_components/paper-audio-player/paper-audio-player.html">
+    <link rel="stylesheet" href="style.css">
 
   </head>
   <body class="dark-primary-color">
-    <play-list-interface></play-list-interface>
-     <ol id=songs_queue>
-
-     </ol>
+    <play-list-interface id="songs_queue" class="wrapper"></play-list-interface>
      <footer id="audioTag" class="footer dark-primary-color" >
        <div class="barraProgresoAudio"></div>
-       <audio id="audio" controls="true"></audio>
+       <!--<audio id="audio" controls="true"></audio>-->
+       <paper-audio-player id="audio" >No puede cargar el reproductor</paper-audio-player>
 
      </footer>
      <script src="./src/drag-drop.js"></script>
