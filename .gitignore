@@ -9,3 +9,4 @@ bower_components
 /npm-debug.log
 *.org
 TODO.org
+.DS_Store
