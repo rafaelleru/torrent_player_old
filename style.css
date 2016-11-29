@@ -50,11 +50,12 @@
   height: 30px;
   width: 100%;
   padding-bottom: 50px;
+  border-top: solid 1px #BDBDBD;
 }
 #audio{
-    height: 28px;
-    margin:0 25%;
-    width: 50%;
+    height: 10px;
+    margin:0 0;
+    width: 100%;
 }
 
 .barraProgresoAudio{
