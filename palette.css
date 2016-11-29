@@ -11,4 +11,13 @@
 body{
   padding-top: 50px;
   color:#D1C4E9;
+
+}
+
+.fit-screen{
+  position:fixed;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
 }
