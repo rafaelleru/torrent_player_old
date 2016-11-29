@@ -19,8 +19,7 @@ ipc.on('toPlay', (event, data) => {
     //console.log('current Torrent in play: ' + currentTorrent.toString());
     audio_tag.src = 'http://localhost:9999/' + data[0].toString();
     audio_tag.title=data[0].toString();
-    play = true;
-    audio_tag.play();
+    audio_tag.autoplay = true;
 
 
     audio_tag.onended = function(){
@@ -45,9 +44,9 @@ ipc.on('PlayPause', (event, data) => {
 
     if(!play){
 	play = true;
-	audio.play();
+	audio.playPause();
     } else {
 	play = false;
-	audio.pause();
+	audio.playPause();
     }
 })
