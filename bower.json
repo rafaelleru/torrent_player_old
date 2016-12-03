@@ -5,7 +5,9 @@
   "dependencies": {
     "polymer": "Polymer/polymer#^1.4.0",
     "play-list-interface": "PlayListInterface#*",
-    "paper-audio-player": "^1.1.1"
+    "paper-audio-player": "^1.1.1",
+    "paper-search": "^1.2.1",
+    "iron-iconset": "^1.0.5"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",

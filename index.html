@@ -10,12 +10,16 @@
   <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   <link rel="import" href="bower_components/play-list-interface/play-list-interface.html">
   <link rel="import" href="bower_components/paper-audio-player/paper-audio-player.html">
+  <link rel="import" href="bower_components/paper-search/paper-search-bar.html">
+  <link rel="import" href="bower_components/iron-icons/social-icons.html">
+  <link rel="import" href="bower_components/iron-icon/iron-icon.html">
   <link rel="stylesheet" href="css/style.css">
 
 </head>
 
 <body style="background-image:url('img/bg.png');" class="fit-screen">
   <img id="dropImage" class="drop-img" src="img/drop.png"/>
+  <paper-search-bar id="search" hide-filter-button='true' icon="icons:link" placeholder="Magnet link"></paper-search-bar>
   <div id="content" class="scrollable">
     <play-list-interface id="songs_queue" class="wrapper"></play-list-interface>
   </div>
