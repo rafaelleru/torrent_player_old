@@ -73,8 +73,8 @@
 }
 
 .scrollable{
-  overflow-y:scroll; 
-  overflow-x:hidden; 
+  overflow-y:scroll;
+  overflow-x:hidden;
   height:90%;
   visibility: hidden;
 }
@@ -87,4 +87,11 @@
   height: 300px;
   margin-top: -150px; /* Half the height */
   margin-left: -150px;
+}
+#search{
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: rgba(255,255,255,0);
+  color: #D1C4E9;
 }
