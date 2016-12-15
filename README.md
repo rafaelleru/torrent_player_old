@@ -32,3 +32,6 @@ Follow these steps:
  - Run  ``bower install``
  - Install electron: npm install electron-prebuilt -g
  - Finally start it: ``electron .``.
+
+## Constributions
+To contribute to this project fork the project and works, when changes works make a  pull request to dev branch, not the master
