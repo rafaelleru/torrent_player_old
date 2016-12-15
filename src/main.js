@@ -91,6 +91,12 @@ ipc.on('addTorrent', function(event, data){
     });
 });
 
+ipc.on('addMagnet', function(event, data){
+    downloaderInstance.addTorrent(data, function(){
+	event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents(), downloaderInstance.getProgress() ]);
+    })
+});
+
 ipc.on('getPlayData', function(event, data){
     var torr = data[1];
     var file = data[0];
