@@ -147,6 +147,9 @@ ipc.on('playEnded', (event, data) => {
     console.log('salto a la siguiente cancion' + currentPlayingFile.toString());
 
     console.log('reproduzco la siguiente cancion');
+})
 
 
+ipc.on('updateProgress', (event, data) => {
+    //almacenamos en un array un par de hash + progreso
 })

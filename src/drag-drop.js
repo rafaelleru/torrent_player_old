@@ -1,5 +1,6 @@
 var dragDrop = require('drag-drop/buffer')
 var ipc1 = require('electron').ipcRenderer;
+var search = document.getElementById('search');
 
 
 dragDrop(document.body, function(files){
@@ -11,3 +12,4 @@ dragDrop(document.body, function(files){
     element = document.getElementById('content');
     element.style.visibility = 'visible';
 })
+

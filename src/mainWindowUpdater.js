@@ -9,6 +9,9 @@ function Updater(){
     this.list_div = document.getElementById('songs_queue');
 };
 
+Updater.prototype.addMagnet = function(){
+
+}
 
 Updater.prototype.reloadList = function(files, n_torrent){
     console.log(files.length.toString() + ' archivos del torrent: '+ n_torrent.toString());
