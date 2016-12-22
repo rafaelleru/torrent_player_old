@@ -76,6 +76,8 @@ app.on('activate', function() {
 // code. You can also put them in separate files and require them here.
 
 const Downloader = require("./downloader.js");
+const fs = require('fs');
+const notifier = require('node-notifier');
 
 var downloaderInstance = new Downloader();
 var currentPlayingTorrent;
@@ -122,6 +124,11 @@ ipc.on('getPlayData', function(event, data){
 	    downloaderInstance.initTorrentServer(data[1]);
 	}
 
+	// Object
+	notifier.notify({
+	    'title': downloaderInstance.getTorrentFiles(data[1])[data[0]].name,
+	    'message': 'torrentPlayer'
+	});
 	event.sender.send('toPlay', [data[0], data[1], downloaderInstance.getTorrentFiles(data[1])[data[0]].name]);
     } else {
 	if(nTorr >= data[1] + 1){
@@ -130,6 +137,10 @@ ipc.on('getPlayData', function(event, data){
 	    downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(data[1] + 1);
 
+	    notifier.notify({
+		'title': downloaderInstance.getTorrentFiles(data[1])[data[0]].name,
+		'message': 'torrentPlayer'
+	    });
 	    event.sender.send('toPlay', [0, data[1] + 1, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
 	} else {
 	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
@@ -137,6 +148,10 @@ ipc.on('getPlayData', function(event, data){
 	    downloaderInstance.closeTorrentServer();
 	    downloaderInstance.initTorrentServer(0);
 
+	    notifier.notify({
+		'title': downloaderInstance.getTorrentFiles(data[1])[data[0]].name,
+		'message': 'torrentPlayer'
+	    });
 	    event.sender.send('toPlay', [0, 0, downloaderInstance.getTorrentFiles(0)[0].name]);
 	}
     }
@@ -155,6 +170,26 @@ ipc.on('playEnded', (event, data) => {
     console.log('reproduzco la siguiente cancion');
 })
 
+function moveFiles(source, dest){
+   fs.readdir(source, (err, files) => {
+	files.forEach( function(file){
+	    if(console.log(fs.lstatSync(file).isDirectory())){
+		fs.mkdir(dest+'/'+file);
+		moveFiles(source+'/'+file, dest+'/'+file);
+	    }else{
+		console.log(savePath+ '/'+file);
+	    }
+	})
+    })
+}
+
+ipc.on('SaveData', (event, data) => {
+    var downloaderPath = "/tmp/webtorrent";
+    var savePath = "~/torrentPlayer"
+
+    moveFiles(downloaderPath, savePath);
+})
+	      
 
 ipc.on('updateProgress', (event, data) => {
     //almacenamos en un array un par de hash + progreso
