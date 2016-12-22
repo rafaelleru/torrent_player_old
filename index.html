@@ -22,10 +22,12 @@
   <template is="dom-bind">
     <paper-search-bar id="search" hide-filter-button='true' icon="icons:link" placeholder="Magnet link" on-paper-search-search=search query="{{query}}"></paper-search-bar>
   </template>
+  <button id="syncButton">Guardar</button>
  
   <div id="content" class="scrollable">
     <play-list-interface id="songs_queue" class="wrapper"></play-list-interface>
   </div>
+  <div 
   <footer id="audioTag" class="footer dark-primary-color">
     <!--<audio id="audio" controls="true"></audio>-->
     <paper-audio-player id="audio" color="#512DA8" auto-play="true">No puede cargar el reproductor</paper-audio-player>
@@ -34,4 +36,5 @@
 
   <script src="./src/songsManager.js"></script>
   <script src="./src/adder.js"></script>
+  <script src="./src/saver.js"></script>
 </body>
