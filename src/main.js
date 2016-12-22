@@ -76,9 +76,9 @@ app.on('activate', function() {
 // code. You can also put them in separate files and require them here.
 
 const Downloader = require("./downloader.js");
-const fs = require('fs');
+const fs = require('fs-extra');
 const notifier = require('node-notifier');
-
+const os = require('os');
 var downloaderInstance = new Downloader();
 var currentPlayingTorrent;
 var currentPlayingFile = 0;
@@ -170,24 +170,16 @@ ipc.on('playEnded', (event, data) => {
     console.log('reproduzco la siguiente cancion');
 })
 
-function moveFiles(source, dest){
-   fs.readdir(source, (err, files) => {
-	files.forEach( function(file){
-	    if(console.log(fs.lstatSync(file).isDirectory())){
-		fs.mkdir(dest+'/'+file);
-		moveFiles(source+'/'+file, dest+'/'+file);
-	    }else{
-		console.log(savePath+ '/'+file);
-	    }
-	})
-    })
-}
-
 ipc.on('SaveData', (event, data) => {
     var downloaderPath = "/tmp/webtorrent";
-    var savePath = "~/torrentPlayer"
+    var savePath = os.homedir()+"/torrentPlayer"
 
-    moveFiles(downloaderPath, savePath);
+    fs.readdir(downloaderPath, (err, files) => {
+	files.forEach(function(file){
+	    console.log("save: " + file + "to: " + savePath+ '/'+file);
+	    fs.copy(downloaderPath+'/'+file, savePath+ '/'+file);
+	})
+    })
 })
 	      
 
