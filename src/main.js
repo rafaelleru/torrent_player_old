@@ -2,7 +2,7 @@
 const electron = require('electron')
 const shortcut = require('electron-localshortcut');
 var ipc = require('electron').ipcMain;
-
+var isPaused = true;
 
 // Module to control application life.
 const app = electron.app
