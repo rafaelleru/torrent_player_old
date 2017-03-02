@@ -94,4 +94,19 @@ Downloader.prototype.getTorrentFiles = function(n_torrent){
 Downloader.prototype.getTorrentMagnet = function(n_torrent){
     return this.client.torrents[n_torrent].magnetURI;
 }
+
+Downloader.prototype.torrentExist = function(magnet){
+    if(this.client.getTorrent(magnet) != null){
+	return true;
+    }else{
+	return false;
+    }
+}
+
+Downloader.prototype.indexOfMagnet = function(magnet){
+    this.client.torrents.forEach( function(t){
+	if(t.magnetURI == magnet)
+	    return this.client.torrents.indexOf(t)
+    })
+}
 module.exports = Downloader;
