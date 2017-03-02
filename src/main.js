@@ -78,10 +78,11 @@ app.on('activate', function() {
 
 const Downloader = require("./downloader.js");
 
+
 var downloaderInstance = new Downloader();
 var currentPlayingTorrent;
 var currentPlayingFile = 0;
-
+var random = false;
 //Mover esto a otro archivo.
 ipc.on('addTorrent', (event, data) => {
 
@@ -109,34 +110,50 @@ ipc.on('getPlayData', (event, data) => {
 
     //cada vez que se hace click en una cancion se reproduc
     isPaused = false;
+    if(random){
+	console.log("Random mode");
+	var randNumMin = 0;
+	var randNumMax = downloaderInstance.getNTorrents() - 1;
+	var randTorr = (Math.floor(Math.random() * (randNumMax - randNumMin + 1)) + randNumMin);
+	console.log(randTorr);
+	var randNumMinSong = 0;
+	var randNumMaxSong = downloaderInstance.getTorrentFiles(randTorr).length;
+	var randSong = (Math.floor(Math.random() * (randNumMaxSong - randNumMinSong + 1)) + randNumMinSong);
 
-    if(nFiles >= data[0] && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
-	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
-	console.log('file number: ' + data[0].toString());
-	if(currentPlayingTorrent != data[1]){
-	    if(currentPlayingTorrent != undefined)
-		downloaderInstance.closeTorrentServer();
+	console.log(randSong);
+	currentPlayingTorrent = randTorr;
+	currentPlayingFile = randSong;
+	event.sender.send('toPlay', [randSong, randTorr, downloaderInstance.getTorrentFiles(randTorr)[randSong].name]);
 
-	    currentPlayingTorrent = data[1];
-	    downloaderInstance.initTorrentServer(data[1]);
-	}
+    }else{
+	if(nFiles >= data[0] && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
+	    //Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
+	    console.log('file number: ' + data[0].toString());
+	    if(currentPlayingTorrent != data[1]){
+		if(currentPlayingTorrent != undefined)
+		    downloaderInstance.closeTorrentServer();
 
-	event.sender.send('toPlay', [data[0], data[1], downloaderInstance.getTorrentFiles(data[1])[data[0]].name]);
-    } else {
-	if(nTorr >= data[1] + 1){
-	    console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
-	    currentPlayingTorrent = data[1]+1;
-	    downloaderInstance.closeTorrentServer();
-	    downloaderInstance.initTorrentServer(currentPlayingTorrent);
+		currentPlayingTorrent = data[1];
+		downloaderInstance.initTorrentServer(data[1]);
+	    }
 
-	    event.sender.send('toPlay', [0, currentPlayingTorrent, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
+	    event.sender.send('toPlay', [data[0], data[1], downloaderInstance.getTorrentFiles(data[1])[data[0]].name]);
 	} else {
-	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
-	    curretPlayingTorrent = 0;
-	    downloaderInstance.closeTorrentServer();
-	    downloaderInstance.initTorrentServer(0);
+	    if(nTorr >= data[1] + 1){
+		console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
+		currentPlayingTorrent = data[1]+1;
+		downloaderInstance.closeTorrentServer();
+		downloaderInstance.initTorrentServer(currentPlayingTorrent);
 
-	    event.sender.send('toPlay', [0, 0, downloaderInstance.getTorrentFiles(0)[0].name]);
+		event.sender.send('toPlay', [0, currentPlayingTorrent, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
+	    } else {
+		//En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
+		curretPlayingTorrent = 0;
+		downloaderInstance.closeTorrentServer();
+		downloaderInstance.initTorrentServer(0);
+
+		event.sender.send('toPlay', [0, 0, downloaderInstance.getTorrentFiles(0)[0].name]);
+	    }
 	}
     }
 })
@@ -160,11 +177,41 @@ ipc.on('updateProgress', (event, data) => {
 
 ipc.on('addSong', (event, data) => {
     //event.sender.send('magnet', [downloaderInstance.getTorrentMagnet(data[0]),data[1]]);
-    fs.writeFile("/home/rafa/test.txt", downloaderInstance.getTorrentMagnet(data[0]) + " " + data[1] , function(err) {
-    if(err) {
-        return console.log("Error saving song: " +err);
-    }
+    fs.appendFile("/home/rafa/test.txt", downloaderInstance.getTorrentMagnet(data[0]) + " " + data[1] + "\n", 'utf8', function(err) {
+	if(err) {
+            return console.log("Error saving song: " +err);
+	}
 
-    console.log("The file was saved!");
+	console.log("The file was saved!");
     });
 });
+
+ipc.on("loadPlaylist", (event, data) => {
+    fs.readFile('/home/rafa/test.txt', 'utf8', (err, data) => {
+	console.log(typeof(data));
+	links = data.split('\n');
+	for(var i=0; i < links.length; ++i){
+	    console.log("*************************")
+	    console.log(links[i]);
+	}
+
+	//array que contiene los archivos que conforman la lista de reproduccion
+	songs_of_playlist = []; 
+	links.forEach( function(parm){
+	    tupla = parm.split(" ");
+
+	    if(downloaderInstance.torrentExist(tupla[0])){
+		songs_of_playlist.add([downloaderInstance.indexOfMagnet(tupla[0]),
+				       tupla[1]])
+	    }else{
+		downloaderInstance.addMagnet(tupla[0]);
+		//el nuevo magnet va al final 
+		songs_of_playlist.add([downloaderInstance.getNTorrents() - 1,
+				       tupla[1]])}
+	})
+   });
+});
+
+ipc.on('randomMode', (event, data) => {
+    random = !random;
+})
