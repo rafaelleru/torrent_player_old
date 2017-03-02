@@ -19,19 +19,28 @@
 
 <body style="background-image:url('img/bg.png');" class="fit-screen">
   <img id="dropImage" class="drop-img" src="img/drop.png"/>
+  <paper-menu-button>
+    <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
+    
+  </paper-menu-button>
+
   <template is="dom-bind">
     <paper-search-bar id="search" hide-filter-button='true' icon="icons:link" placeholder="Magnet link" on-paper-search-search=search query="{{query}}"></paper-search-bar>
   </template>
+
+  <button id="save_button">savePlaylist</button>
  
   <div id="content" class="scrollable">
     <play-list-interface id="songs_queue" class="wrapper"></play-list-interface>
   </div>
   <footer id="audioTag" class="footer dark-primary-color">
     <!--<audio id="audio" controls="true"></audio>-->
+    <!-- esto a un webbiew para uqe no se corte la reproduccion --> 
     <paper-audio-player id="audio" color="#512DA8" auto-play="true">No puede cargar el reproductor</paper-audio-player>
 
   </footer>
 
   <script src="./src/songsManager.js"></script>
   <script src="./src/adder.js"></script>
+  <script src="./src/mainEventsManager.js"></script>
 </body>

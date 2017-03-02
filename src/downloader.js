@@ -91,4 +91,7 @@ Downloader.prototype.getTorrentFiles = function(n_torrent){
     return this.client.torrents[n_torrent].files;
 }
 
+Downloader.prototype.getTorrentMagnet = function(n_torrent){
+    return this.client.torrents[n_torrent].magnetURI;
+}
 module.exports = Downloader;

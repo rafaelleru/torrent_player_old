@@ -1,6 +1,7 @@
 //author: @rafaelleru
 
 const {ipcRenderer} = require('electron');
+var fs = require('fs');
 
 var currentPlayingFile;
 
@@ -16,6 +17,14 @@ Updater.prototype.reloadList = function(files, n_torrent){
 	if(files[i].name.indexOf('mp3') != -1){
             var div_row = document.createElement('div');
             div_row.setAttribute('class','torrent');
+
+	    var add_button = document.createElement('button');
+	    add_button.setAttribute('text', 'save')
+
+	   
+
+	    div_row.appendChild(add_button);
+	    
 	    /* First column */
             var number_element = document.createElement('div');
             number_element.setAttribute('id',i);
@@ -58,6 +67,12 @@ Updater.prototype.reloadList = function(files, n_torrent){
 		title_element.onclick = function(){
 		    requestPlay(i, n_torrent-1);
 		};
+
+		add_button.onclick = function(){
+	
+		    ipcRenderer.send('addSong', [n_torrent-1,i]);
+		      
+		};
 	    })(i);
         }
     }
@@ -81,5 +96,6 @@ Updater.prototype.play = function (file){
     var stream  = file;
     console.log(stream.data());
 }
+
 
 module.exports = Updater;

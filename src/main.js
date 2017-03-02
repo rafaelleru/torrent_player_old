@@ -3,6 +3,7 @@ const electron = require('electron')
 const shortcut = require('electron-localshortcut');
 var ipc = require('electron').ipcMain;
 var isPaused = true;
+const fs = require('fs');
 
 // Module to control application life.
 const app = electron.app
@@ -82,7 +83,7 @@ var currentPlayingTorrent;
 var currentPlayingFile = 0;
 
 //Mover esto a otro archivo.
-ipc.on('addTorrent', function(event, data){
+ipc.on('addTorrent', (event, data) => {
 
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
@@ -91,13 +92,13 @@ ipc.on('addTorrent', function(event, data){
     });
 });
 
-ipc.on('addMagnet', function(event, data){
+ipc.on('addMagnet', (event, data) => {
     downloaderInstance.addTorrent(data, function(){
 	event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents(), downloaderInstance.getProgress() ]);
     })
 });
 
-ipc.on('getPlayData', function(event, data){
+ipc.on('getPlayData', (event, data) => {
     var torr = data[1];
     var file = data[0];
 
@@ -149,7 +150,6 @@ ipc.on('playEnded', (event, data) => {
 
     currentPlayingFile = data+1;
     console.log('salto a la siguiente cancion' + currentPlayingFile.toString());
-
     console.log('reproduzco la siguiente cancion');
 })
 
@@ -157,3 +157,14 @@ ipc.on('playEnded', (event, data) => {
 ipc.on('updateProgress', (event, data) => {
     //almacenamos en un array un par de hash + progreso
 })
+
+ipc.on('addSong', (event, data) => {
+    //event.sender.send('magnet', [downloaderInstance.getTorrentMagnet(data[0]),data[1]]);
+    fs.writeFile("/home/rafa/test.txt", downloaderInstance.getTorrentMagnet(data[0]) + " " + data[1] , function(err) {
+    if(err) {
+        return console.log("Error saving song: " +err);
+    }
+
+    console.log("The file was saved!");
+    });
+});
