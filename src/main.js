@@ -110,54 +110,56 @@ ipc.on('getPlayData', (event, data) => {
 
     //cada vez que se hace click en una cancion se reproduc
     isPaused = false;
-    if(random){
-	console.log("Random mode");
-	var randNumMin = 0;
-	var randNumMax = downloaderInstance.getNTorrents() - 1;
-	var randTorr = (Math.floor(Math.random() * (randNumMax - randNumMin + 1)) + randNumMin);
-	console.log(randTorr);
-	var randNumMinSong = 0;
-	var randNumMaxSong = downloaderInstance.getTorrentFiles(randTorr).length;
-	var randSong = (Math.floor(Math.random() * (randNumMaxSong - randNumMinSong + 1)) + randNumMinSong);
-
-	console.log(randSong);
-	currentPlayingTorrent = randTorr;
-	currentPlayingFile = randSong;
-	event.sender.send('toPlay', [randSong, randTorr, downloaderInstance.getTorrentFiles(randTorr)[randSong].name]);
-
-    }else{
-	if(nFiles >= data[0] && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
-	    //Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
-	    console.log('file number: ' + data[0].toString());
-	    if(currentPlayingTorrent != data[1]){
-		if(currentPlayingTorrent != undefined)
-		    downloaderInstance.closeTorrentServer();
-
-		currentPlayingTorrent = data[1];
-		downloaderInstance.initTorrentServer(data[1]);
-	    }
-
-	    event.sender.send('toPlay', [data[0], data[1], downloaderInstance.getTorrentFiles(data[1])[data[0]].name]);
-	} else {
-	    if(nTorr >= data[1] + 1){
-		console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
-		currentPlayingTorrent = data[1]+1;
+    if(nFiles >= data[0] && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
+	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
+	console.log('file number: ' + data[0].toString());
+	if(currentPlayingTorrent != data[1]){
+	    if(currentPlayingTorrent != undefined)
 		downloaderInstance.closeTorrentServer();
-		downloaderInstance.initTorrentServer(currentPlayingTorrent);
 
-		event.sender.send('toPlay', [0, currentPlayingTorrent, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
-	    } else {
-		//En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
-		curretPlayingTorrent = 0;
-		downloaderInstance.closeTorrentServer();
-		downloaderInstance.initTorrentServer(0);
-
-		event.sender.send('toPlay', [0, 0, downloaderInstance.getTorrentFiles(0)[0].name]);
-	    }
+	    currentPlayingTorrent = data[1];
+	    downloaderInstance.initTorrentServer(data[1]);
 	}
+
+	event.sender.send('toPlay', [data[0], data[1], downloaderInstance.getTorrentFiles(data[1])[data[0]].name]);
+    } else {
+	if(nTorr >= data[1] + 1){
+	    console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
+	    currentPlayingTorrent = data[1]+1;
+	    downloaderInstance.closeTorrentServer();
+	    downloaderInstance.initTorrentServer(currentPlayingTorrent);
+
+	    event.sender.send('toPlay', [0, currentPlayingTorrent, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
+	} else {
+	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
+	    curretPlayingTorrent = 0;
+	    downloaderInstance.closeTorrentServer();
+	    downloaderInstance.initTorrentServer(0);
+
+	    event.sender.send('toPlay', [0, 0, downloaderInstance.getTorrentFiles(0)[0].name]);
+	}
+
     }
 })
 
+ipc.on('nextRandom', (event, data) => {
+
+    do{
+	console.log("Random mode");
+	var randNumMin = 0;
+	var randNumMax = downloaderInstance.getNTorrents() - 1;
+	var randTorr = (Math.floor(Math.random() * randNumMax))
+	console.log(randTorr);
+	var randNumMinSong = 0;
+	var randNumMaxSong = downloaderInstance.getTorrentFiles(randTorr).length;
+	var randSong = (Math.floor(Math.random() * randNumMaxSong))
+    }while(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1);
+    
+    console.log(randSong);
+    currentPlayingTorrent = randTorr;
+    currentPlayingFile = randSong;
+    event.sender.send('toPlay', [randSong, randTorr, downloaderInstance.getTorrentFiles(randTorr)[randSong].name]);
+})
 // TODO: Barra de progreso de descarga
 
 
