@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name="author" content="(Rafael Leyva Ruiz)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2 class="author">Rafael Leyva Ruiz</h2><p class="date">Created: 2017-03-09 jue 18:32</p>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org4bb5612">1. Torrent music player</a></li>
+<li><a href="#/slide-org28fe5c9">2. Que hace torrent Player</a></li>
+<li><a href="#/slide-orgc45d91e">3. Tecnologias usadas</a></li>
+<li><a href="#/slide-org74c507c">4. Objetivos</a></li>
+<li><a href="#/slide-orgebb9674">5. Por que software libre</a></li>
+<li><a href="#/slide-orgd9f50f8">6. Como colaborar</a></li>
+<li><a href="#/slide-org9151c04">7. Al turrón</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section>
+<section id="slide-org4bb5612">
+<h2 id="org4bb5612"><span class="section-number-2">1</span> Torrent music player</h2>
+<p>
+<a href="https://www.github.com/rafaelleru/torrent_player">https://www.github.com/rafaelleru/torrent_player</a>
+</p>
+
+<p>
+<a href="https://www.github.com/rafaelleru">rafaelleru</a>
+</p>
+
+<p>
+<a href="https://twitter.com/rafaleyvaruiz">@rafaleyvaruiz</a>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org28fe5c9">
+<h2 id="org28fe5c9"><span class="section-number-2">2</span> Que hace torrent Player</h2>
+<p>
+Reproductor de musica sencillo.
+Tomando contenido de archivos .torrent
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc45d91e">
+<h2 id="orgc45d91e"><span class="section-number-2">3</span> Tecnologias usadas</h2>
+<p>
+Torrent player emplea tecnologías novedosas, aplicadas en entornos reales y profesionales.
+</p>
+<ul>
+<li>electron</li>
+<li>polymer</li>
+<li>webRTC</li>
+<li>Node js</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org74c507c">
+<h2 id="org74c507c"><span class="section-number-2">4</span> Objetivos</h2>
+<p>
+Crear un sencillo reproductor en el que el usuario controle su
+musica, como almacenarla, que desea compartir y que no.
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgebb9674">
+<h2 id="orgebb9674"><span class="section-number-2">5</span> Por que software libre</h2>
+<ul>
+<li>El software libre es un pilar fundamental en los nuevos desarrollos.</li>
+<li>Proporciona mayor seguridad y libertad que el software privativo.</li>
+<li>Libre no implica gratis.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd9f50f8">
+<h2 id="orgd9f50f8"><span class="section-number-2">6</span> Como colaborar</h2>
+<ul>
+<li>Testeando.</li>
+<li>Creando test.</li>
+<li>programando(back end y front end)</li>
+<li>Documentando.</li>
+<li>Web para el proyecto.</li>
+<li>Reportando fallos.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org9151c04" data-background="http://vignette1.wikia.nocookie.net/inciclopedia/images/b/b4/Akfg1.jpg/revision/latest?cb=20060724131337">
+<h2 id="org9151c04"><span class="section-number-2">7</span> Al turrón</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>
