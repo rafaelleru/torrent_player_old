@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Reproductor de musica</title>
+  <title>Torrent Player powered by electron</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
     crossorigin="anonymous">
   <link rel="stylesheet" href="css/palette.css" media="screen" title="no title">
@@ -18,21 +18,35 @@
 </head>
 
 <body style="background-image:url('img/bg.png');" class="fit-screen">
-  <img id="dropImage" class="drop-img" src="img/drop.png"/>
-  <paper-menu-button>
-    <paper-icon-button icon="menu" class="dropdown-trigger"></paper-icon-button>
-    
-  </paper-menu-button>
+    <img id="dropImage" class="drop-img" src="img/drop.png"/>
+	<paper-menu class="dropdown-content">
+	    <paper-item>Mi libreria</paper-item>
+	    <paper-item>Configuracion</paper-item>
+	    <paper-item>Progreso</paper-item>
+	</paper-menu>
 
   <template is="dom-bind">
-    <paper-search-bar id="search" hide-filter-button='true' icon="icons:link" placeholder="Magnet link" on-paper-search-search=search query="{{query}}"></paper-search-bar>
+    <paper-search-bar id="search" hide-filter-button='true' icon="icons:magnet" icon="icons:link" placeholder="Magnet link" on-paper-search-search=search query="{{query}}"></paper-search-bar>
   </template>
 
-  <button id="save_button">savePlaylist</button>
-  <button id="load_playlist">Cargar ultima lista de reproduccion</button>
-  <button id="random_play">Modo aleatorio</button>
+  <!-- <button id="save_button">savePlaylist</button> -->
+  <paper-button id="save_button">
+      <iron-icon src="./ic_save_black_24px.svg"></iron-icon>
+  </paper-button>
   
-  <div id="content" class="scrollable">a
+  <!-- <button id="load_playlist">Cargar ultima lista de reproduccion</button> -->
+  <paper-button id="load_playlist">
+      <iron-icon src="./ic_playlist_play_black_24px.svg"></iron-icon>
+  </paper-button>
+
+  
+  <!-- <button id="random_play">Modo aleatorio</button> -->
+
+  <paper-button id="random_play">
+      <iron-icon src="./ic_shuffle_black_24px.svg"></iron-icon>
+  </paper-button>
+  
+  <div id="content" class="scrollable">
     <play-list-interface id="songs_queue" class="wrapper"></play-list-interface>
   </div>
   <footer id="audioTag" class="footer dark-primary-color">
