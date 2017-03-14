@@ -2,7 +2,8 @@
 const electron = require('electron')
 const shortcut = require('electron-localshortcut');
 var ipc = require('electron').ipcMain;
-
+var isPaused = true;
+const fs = require('fs');
 
 // Module to control application life.
 const app = electron.app
@@ -79,12 +80,13 @@ const Downloader = require("./downloader.js");
 const fs = require('fs-extra');
 const notifier = require('node-notifier');
 const os = require('os');
+
 var downloaderInstance = new Downloader();
 var currentPlayingTorrent;
 var currentPlayingFile = 0;
-
+var random = false;
 //Mover esto a otro archivo.
-ipc.on('addTorrent', function(event, data){
+ipc.on('addTorrent', (event, data) => {
 
     data.forEach( function(file){
 	downloaderInstance.addTorrent(file, function(){
@@ -93,26 +95,23 @@ ipc.on('addTorrent', function(event, data){
     });
 });
 
-ipc.on('addMagnet', function(event, data){
+ipc.on('addMagnet', (event, data) => {
     downloaderInstance.addTorrent(data, function(){
 	event.sender.send('updatePlayList', [ downloaderInstance.getLastFiles(), downloaderInstance.getNumberOfTorrents(), downloaderInstance.getProgress() ]);
     })
 });
 
-ipc.on('getPlayData', function(event, data){
+ipc.on('getPlayData', (event, data) => {
     var torr = data[1];
     var file = data[0];
 
     var nFiles = downloaderInstance.getTorrent(torr).files.length;
     var nTorr = downloaderInstance.getNTorrents();
 
-    nFiles = nFiles;
-    nTorr = nTorr;
     console.log(data[1]);
 
     //cada vez que se hace click en una cancion se reproduc
     isPaused = false;
-
     if(nFiles >= data[0] && !(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1)){
 	//Si el siguiente archivo pertenece al mismo torrent simplemente reproducirlo
 	console.log('file number: ' + data[0].toString());
@@ -133,15 +132,16 @@ ipc.on('getPlayData', function(event, data){
     } else {
 	if(nTorr >= data[1] + 1){
 	    console.log('Si existe el siguiente torrent empezamos a reproducirlo.');
-	    currentPlayingTorrent = data[1];
+	    currentPlayingTorrent = data[1]+1;
 	    downloaderInstance.closeTorrentServer();
-	    downloaderInstance.initTorrentServer(data[1] + 1);
+	    downloaderInstance.initTorrentServer(currentPlayingTorrent);
 
 	    notifier.notify({
 		'title': downloaderInstance.getTorrentFiles(data[1])[data[0]].name,
 		'message': 'torrentPlayer'
 	    });
-	    event.sender.send('toPlay', [0, data[1] + 1, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
+
+	    event.sender.send('toPlay', [0, currentPlayingTorrent, downloaderInstance.getTorrentFiles(data[1]+1)[0].name]);
 	} else {
 	    //En otro caso comenzams a reproducir el primer torrent que el usuario añadio.
 	    curretPlayingTorrent = 0;
@@ -154,9 +154,28 @@ ipc.on('getPlayData', function(event, data){
 	    });
 	    event.sender.send('toPlay', [0, 0, downloaderInstance.getTorrentFiles(0)[0].name]);
 	}
+
     }
 })
 
+ipc.on('nextRandom', (event, data) => {
+
+    do{
+	console.log("Random mode");
+	var randNumMin = 0;
+	var randNumMax = downloaderInstance.getNTorrents() - 1;
+	var randTorr = (Math.floor(Math.random() * randNumMax))
+	console.log(randTorr);
+	var randNumMinSong = 0;
+	var randNumMaxSong = downloaderInstance.getTorrentFiles(randTorr).length;
+	var randSong = (Math.floor(Math.random() * randNumMaxSong))
+    }while(downloaderInstance.getTorrentFiles(data[1])[data[0]].name.indexOf('mp3') == -1);
+    
+    console.log(randSong);
+    currentPlayingTorrent = randTorr;
+    currentPlayingFile = randSong;
+    event.sender.send('toPlay', [randSong, randTorr, downloaderInstance.getTorrentFiles(randTorr)[randSong].name]);
+})
 // TODO: Barra de progreso de descarga
 
 
@@ -166,7 +185,6 @@ ipc.on('playEnded', (event, data) => {
 
     currentPlayingFile = data+1;
     console.log('salto a la siguiente cancion' + currentPlayingFile.toString());
-
     console.log('reproduzco la siguiente cancion');
 })
 
@@ -185,4 +203,45 @@ ipc.on('SaveData', (event, data) => {
 
 ipc.on('updateProgress', (event, data) => {
     //almacenamos en un array un par de hash + progreso
+})
+
+ipc.on('addSong', (event, data) => {
+    //event.sender.send('magnet', [downloaderInstance.getTorrentMagnet(data[0]),data[1]]);
+    fs.appendFile("/home/rafa/test.txt", downloaderInstance.getTorrentMagnet(data[0]) + " " + data[1] + "\n", 'utf8', function(err) {
+	if(err) {
+            return console.log("Error saving song: " +err);
+	}
+
+	console.log("The file was saved!");
+    });
+});
+
+ipc.on("loadPlaylist", (event, data) => {
+    fs.readFile('/home/rafa/test.txt', 'utf8', (err, data) => {
+	console.log(typeof(data));
+	links = data.split('\n');
+	for(var i=0; i < links.length; ++i){
+	    console.log("*************************")
+	    console.log(links[i]);
+	}
+
+	//array que contiene los archivos que conforman la lista de reproduccion
+	songs_of_playlist = []; 
+	links.forEach( function(parm){
+	    tupla = parm.split(" ");
+
+	    if(downloaderInstance.torrentExist(tupla[0])){
+		songs_of_playlist.add([downloaderInstance.indexOfMagnet(tupla[0]),
+				       tupla[1]])
+	    }else{
+		downloaderInstance.addMagnet(tupla[0]);
+		//el nuevo magnet va al final 
+		songs_of_playlist.add([downloaderInstance.getNTorrents() - 1,
+				       tupla[1]])}
+	})
+   });
+});
+
+ipc.on('randomMode', (event, data) => {
+    random = !random;
 })
