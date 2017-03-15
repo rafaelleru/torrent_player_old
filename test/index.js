@@ -6,7 +6,7 @@ describe('application launch', function () {
 
   beforeEach(function () {
     this.app = new Application({
-      path: '/data/mis_programas/torrent_player/Torrent-Player-linux-x64/Torrent-Player'
+      path: __dirname + '/../Torrent-Player-linux-x64/Torrent-Player'
     })
     return this.app.start()
   })
