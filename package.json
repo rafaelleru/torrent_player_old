@@ -37,7 +37,8 @@
     "gh-release": "^2.0.3",
     "nobin-debian-installer": "^0.0.9",
     "plist": "^1.2.0",
-    "standard": "^6.0.5"
+      "standard": "^6.0.5",
+      "spectron": "^3.0.0"
   },
   "dependencies": {
       "application-config": "^0.2.0",
