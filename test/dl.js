@@ -11,7 +11,9 @@ describe( "Crea un objeto y añade torrent", function() {
     });
 
     it( "Añade sin problemas un torrent", function( done ) {
-	dl.addTorrent( fixtures.leaves.magnetURI);
+	dl.addTorrent( fixtures.leaves.magnetURI, function () {
+	    console.log("callback");
+	});
 	should.equal( dl._torrentsArray.length, 1);
 	done()
     })
