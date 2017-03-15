@@ -3,5 +3,6 @@ sudo: false
 node_js:
   - "4.4.3"
   - "6"
+  - "7"
   - "stable"
 script: mocha
