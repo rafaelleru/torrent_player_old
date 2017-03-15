@@ -1,0 +1,7 @@
+{
+  "name": "torrent-player",
+  "short_name": "torrent-player",
+  "description": "Torrent player",
+  "start_url": "/",
+  "display": "standalone"
+}
