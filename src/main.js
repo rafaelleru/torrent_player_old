@@ -77,7 +77,6 @@ app.on('activate', function() {
 // code. You can also put them in separate files and require them here.
 
 const Downloader = require("./downloader.js");
-const fs = require('fs-extra');
 const notifier = require('node-notifier');
 const os = require('os');
 
