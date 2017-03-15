@@ -47,7 +47,6 @@
       "electron-localshortcut": "^0.6.1",
       "electron-prebuilt": "0.37.5",
       "webtorrent": "^0.97.2",
-      "node-notifier": "^4.5.1",
-      "fs-extra": "^1.4.10"      
+      "node-notifier": "^4.5.1"
   }
 }
