@@ -8,7 +8,7 @@
     "package": "npm install && npm prune && npm dedupe && node ./bin/package.js",
     "size": "npm run package -- darwin && du -ch dist/TorrentPlayer-darwin-x64 | grep total",
     "start": "electron .",
-    "test": "standard",
+    "test": "mocha",
     "update-authors": "./bin/update-authors.sh"
   },
   "repository": {
