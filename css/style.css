@@ -95,3 +95,10 @@
   background-color: rgba(255,255,255,0);
   color: #D1C4E9;
 }
+
+.lateral-menu{
+    position:fixed;
+    width:20%;
+    color: #D1C4E9;
+    float:left;
+}

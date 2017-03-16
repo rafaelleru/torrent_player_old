@@ -18,13 +18,14 @@
 </head>
 
 <body style="background-image:url('img/bg.png');" class="fit-screen">
-    <img id="dropImage" class="drop-img" src="img/drop.png"/>
-	<paper-menu class="dropdown-content">
-	    <paper-item>Mi libreria</paper-item>
-	    <paper-item>Configuracion</paper-item>
-	    <paper-item>Progreso</paper-item>
-	</paper-menu>
-
+  <img id="dropImage" class="drop-img" src="img/drop.png"/>
+  <div class="lateral-menu">
+      <paper-menu class="dropdown-content">
+	  <paper-item>Mi libreria</paper-item>
+	  <paper-item>Configuracion</paper-item>
+	  <paper-item>Progreso</paper-item>
+      </paper-menu>
+  </div>
   <template is="dom-bind">
     <paper-search-bar id="search" hide-filter-button='true' icon="icons:magnet" icon="icons:link" placeholder="Magnet link" on-paper-search-search=search query="{{query}}"></paper-search-bar>
   </template>
