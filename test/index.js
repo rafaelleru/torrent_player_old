@@ -6,7 +6,10 @@ describe('application launch', function () {
 
     beforeEach(function () {
 	this.app = new Application({
-	    path: __dirname + '/../Torrent-Player-linux-x64/Torrent-Player'
+	    //path: __dirname + '/../Torrent-Player-linux-x64/Torrent-Player'
+	    path: path.join(__dirname, '..', 'node_modules', '.bin',
+			    'electron')
+	    args: ['.']
 	})
 	return this.app.start()
     })
