@@ -1,6 +1,6 @@
 var Application = require('spectron').Application
 var assert = require('assert')
-
+var path = require('path')
 describe('application launch', function () {
   this.timeout(10000)
 
