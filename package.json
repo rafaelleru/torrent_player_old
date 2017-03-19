@@ -37,17 +37,17 @@
     "gh-release": "^2.0.3",
     "nobin-debian-installer": "^0.0.9",
     "plist": "^1.2.0",
-      "standard": "^6.0.5",
-      "spectron": "^3.0.0"
+    "standard": "^6.0.5",
+    "spectron": "^3.0.0"
   },
   "dependencies": {
-      "application-config": "^0.2.0",
-      "application-config-path": "^0.1.0",
-      "drag-drop": "^2.12.1",
-      "electron": "^1.4.4",
-      "electron-localshortcut": "^0.6.1",
-      "electron-prebuilt": "0.37.5",
-      "webtorrent": "^0.97.2",
-      "node-notifier": "^4.5.1"
+    "application-config": "^0.2.0",
+    "application-config-path": "^0.1.0",
+    "drag-drop": "^2.12.1",
+    "electron": "^1.4.4",
+    "electron-localshortcut": "^0.6.1",
+    "electron-prebuilt": "0.37.5",
+    "node-notifier": "^4.5.1",
+    "webtorrent": "^0.97.2"
   }
 }
