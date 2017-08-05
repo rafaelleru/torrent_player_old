@@ -9,11 +9,16 @@ songs =  [
 Vue.component('Song', {
   template: '\
     <li>\
-      <h3> {{ title }} </h3>\
+      <h3 v-on:click="alert"> {{ title }} </h3>\
       <h5> {{ torrent }} </h5>\
     </li>\
   ',
-  props: ['title', 'torrent']
+  props: ['title', 'torrent'],
+  methods: {
+    alert: function() {
+      alert("eeee")
+    }
+  }
 })
 
 var example1 = new Vue({
@@ -33,6 +38,9 @@ var example1 = new Vue({
             })
           })
         })
+    },
+    log: function(event) {
+      console.log("play ")
     }
   }
 })
