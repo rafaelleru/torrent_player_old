@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <script src="https://unpkg.com/vue"></script>
+  </head>
+  <body>
+    <ul id="example-1">
+      <input
+        v-model="magnet"
+        v-on:keyup.enter="addMagnet"
+        placeholder="Insert a magnet link"
+      >
+      <li
+        is="Song"
+        v-for="(song, key) in songs"
+        v-bind:title="song.title"
+        v-bind:torrent="song.torrent"
+        v-on:remove="todos.splice(index, 1)"
+      ></li>
+    </ul>
+    <script src="./testvue.js"></script>
+  </body>
+</html>
