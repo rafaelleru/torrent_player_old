@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Hello World!</title>
     <script src="https://unpkg.com/vue"></script>
+    <link rel="import" href="bower_components/paper-audio-player/paper-audio-player.html">
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
   </head>
   <body>
     <ul id="example-1">
@@ -17,9 +19,11 @@
         v-for="(song, key) in songs"
         v-bind:title="song.title"
         v-bind:torrent="song.torrent"
-        v-on:remove="todos.splice(index, 1)"
       ></li>
     </ul>
+    <footer>
+      <paper-audio-player id="audio" color="grey" auto-play="true">No se puede cargar el reproductor</paper-audio-player>
+    <footer>
     <script src="./testvue.js"></script>
   </body>
 </html>
