@@ -6,24 +6,42 @@
     <script src="https://unpkg.com/vue"></script>
     <link rel="import" href="bower_components/paper-audio-player/paper-audio-player.html">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
   </head>
-  <body>
-    <ul id="example-1">
-      <input
-        v-model="magnet"
-        v-on:keyup.enter="addMagnet"
-        placeholder="Insert a magnet link"
-      >
-      <li
-        is="Song"
-        v-for="(song, key) in songs"
-        v-bind:title="song.title"
-        v-bind:torrent="song.torrent"
-      ></li>
-    </ul>
-    <footer>
+  <body style="background-color:#616161">
+    <!-- header toolbar -->
+    <header id="header" class="header">
+      <nav class="inner">
+        <a style="display: inline-block">Sound Time</a>
+        <a style="display: inline-block">
+          <input id="magnet-input"
+            v-model="magnet"
+            v-on:keyup.enter="addMagnet"
+            placeholder="Insert a magnet link"
+            >
+        </a>
+        <input type="file" name="file" id="file" class="inputfile" />
+        <label for="file">
+          <i class="material-icons">folder_open</i>
+        </label>
+        <a class="download-status">
+          <i class="material-icons">file_download</i>
+        </a>
+      </nav>
+    </header>
+    <div id="example-1" class="content">
+      <div
+          is="Song"
+          v-for="(song, key) in songs"
+          v-bind:title="song.title"
+          v-bind:torrent="song.torrent"
+          v-bind:index="song.index">
+      </div>
+    </div>
+    <footer class="footer">
       <paper-audio-player id="audio" color="grey" auto-play="true">No se puede cargar el reproductor</paper-audio-player>
-    <footer>
-    <script src="./testvue.js"></script>
+    </footer>
+    <script src="./songs-list.js"></script>
   </body>
 </html>

@@ -1,0 +1,80 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+}
+
+.header {
+  background-color: #BA68C8;
+  position: fixed;
+  z-index: 999;
+  height: 55px;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.inner {
+  max-width: 800px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 10px 5px;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: transparent;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: transparent;
+    color: #616161;
+}
+
+.song-title {
+  cursor: pointer;
+  color: black;
+}
+
+.song-title:hover {
+  color: #BA68C8;
+}
+
+.song {
+  height: 60px;
+  border-bottom: 1px solid #212121;
+}
+
+.content {
+  margin-top: 60px;
+  margin-bottom: 60px;
+}
+
+.download-status{
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.download-status:focus + a,
+.download-status + a.hover {
+    background-color: transparent;
+    color: #616161;
+}
