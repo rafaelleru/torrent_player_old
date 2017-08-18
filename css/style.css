@@ -7,7 +7,7 @@
 }
 
 .header {
-  background-color: #BA68C8;
+  background-color: #536DFE;
   position: fixed;
   z-index: 999;
   height: 55px;
@@ -22,6 +22,7 @@
   box-sizing: border-box;
   margin: 0 auto;
   padding: 10px 5px;
+  color: white;
 }
 
 .inputfile {
@@ -48,18 +49,34 @@
     color: #616161;
 }
 
+.utility-button {
+  float: right;
+  vertical-align: middle;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.utility-button:focus + a,
+.utility-button:hover {
+    background-color: transparent;
+    color: #616161;
+}
+
+
 .song-title {
   cursor: pointer;
-  color: black;
+  color: primary-text-color;
+  display: inline-block;
 }
 
 .song-title:hover {
-  color: #BA68C8;
+  color: #607D8B;
 }
 
 .song {
-  height: 60px;
-  border-bottom: 1px solid #212121;
+  /*border-bottom: 1px solid #212121;
+  background-color: whithe /*#616161*/
 }
 
 .content {
@@ -71,10 +88,35 @@
   background-color: transparent;
   color: white;
   cursor: pointer;
+  float: right;
 }
 
 .download-status:focus + a,
-.download-status + a.hover {
+.download-status:hover {
     background-color: transparent;
     color: #616161;
+}
+
+.play-button {
+  display: table-cell;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.play-button:hover{
+  color: #607D8B;
+}
+
+
+.song-container {
+  text-align: left;
+  display:table-cell;
+}
+
+.song:nth-child(even) {
+  background-color: #ECEFF1;
+}
+
+.song:nth-child(odd) {
+  background-color: #CFD8DC;
 }

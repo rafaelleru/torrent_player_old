@@ -2,46 +2,59 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>Torrent Player</title>
     <script src="https://unpkg.com/vue"></script>
     <link rel="import" href="bower_components/paper-audio-player/paper-audio-player.html">
     <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/palette.css">
   </head>
-  <body style="background-color:#616161">
+  <body>
     <!-- header toolbar -->
     <header id="header" class="header">
-      <nav class="inner">
-        <a style="display: inline-block">Sound Time</a>
-        <a style="display: inline-block">
+      <nav class="inner" style="vertical-align: middle">
+        <a style="display: inline-block; font-size: x-large; float: left">Torrent Player</a>
+        <a style="display: inline-block; vertical-align: middle;">
           <input id="magnet-input"
             v-model="magnet"
             v-on:keyup.enter="addMagnet"
             placeholder="Insert a magnet link"
+            style="vertical-align: middle"
             >
         </a>
-        <input type="file" name="file" id="file" class="inputfile" />
-        <label for="file">
+        <input type="file" name="file" id="file" class="inputfile utility-button" />
+        <label for="file" class="utility-button">
           <i class="material-icons">folder_open</i>
         </label>
-        <a class="download-status">
+        <a class="utility-button">
           <i class="material-icons">file_download</i>
+        </a>
+        <a class="utility-button">
+          <i class="material-icons">settings</i>
+        </a>
+        <a class="utility-button">
+          <i class="material-icons">search</i>
         </a>
       </nav>
     </header>
+    <!-- <div id="dd" style="text-align: center; margin-top:15%">
+      <i v-if="seen" class="material-icons" style="font-size: big"></i>
+    </div> -->
     <div id="example-1" class="content">
       <div
           is="Song"
           v-for="(song, key) in songs"
           v-bind:title="song.title"
           v-bind:torrent="song.torrent"
-          v-bind:index="song.index">
+          v-bind:index="song.index"
+          v-bind:duration="song.duration">
       </div>
     </div>
     <footer class="footer">
       <paper-audio-player id="audio" color="grey" auto-play="true">No se puede cargar el reproductor</paper-audio-player>
     </footer>
     <script src="./songs-list.js"></script>
+    <!-- <script src="./drag-drop.js"></script> -->
   </body>
 </html>
