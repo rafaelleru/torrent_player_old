@@ -14,5 +14,12 @@
     "p2p"
   ],
   "author": "Rafael Leyva Ruiz",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.5.0",
+    "drag-drop": "^2.13.2",
+    "mp3-duration": "^1.0.10",
+    "vuejs": "^1.0.29",
+    "webtorrent": "^0.98.19"
+  }
 }
