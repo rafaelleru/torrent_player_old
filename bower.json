@@ -1,0 +1,8 @@
+{
+  "name": "torrent-player",
+  "description": "Torrent player",
+  "main": "index.html",
+  "dependencies": {
+     "paper-audio-player": "^1.1.1",
+   }
+}
