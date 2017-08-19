@@ -39,7 +39,7 @@ songs = [
 ]
 Vue.component('Song', {
   template: '\
-      <div class="song">\
+      <div v-bind:class="{ \'light-primary-color\': play, song: notplay}">\
         <div class="play-button">\
           <i class="material-icons" v-on:click="alert">play_circle_outline</i>\
         </div>\
@@ -52,9 +52,17 @@ Vue.component('Song', {
       </div>\
   ',
   props: ['title', 'torrent', 'index', 'duration'],
+  data: function() {
+    return {
+      play: false,
+      notplay: true
+    }
+  },
   methods: {
     alert: function() {
       ipcRenderer.send("play", [this.torrent, this.index, this.title]);
+      this.play = true;
+      this.notplay = false;
     }
   }
 })
