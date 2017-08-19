@@ -7,7 +7,7 @@
 }
 
 .header {
-  background-color: #536DFE;
+  /*background-color: #536DFE;*/
   position: fixed;
   z-index: 999;
   height: 55px;
